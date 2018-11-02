@@ -18,3 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Expenses
+Route::group(['prefix' => 'expenses'], function () {
+    Route::get('/', 'ExpenseController@index');
+    Route::get('create', 'ExpenseController@create');
+    Route::post('/', 'ExpenseController@store');
+    Route::get('{id}', 'ExpenseController@show');
+    Route::get('{id}/edit', 'ExpenseController@edit');
+    Route::patch('{id}', 'ExpenseController@update');
+    Route::delete('{id}', 'ExpenseController@destroy');
+});
