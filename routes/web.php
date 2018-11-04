@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ExpenseController@index');
 
 Auth::routes();
 
@@ -24,8 +22,8 @@ Route::group(['prefix' => 'expenses'], function () {
     Route::get('/', 'ExpenseController@index');
     Route::get('create', 'ExpenseController@create');
     Route::post('/', 'ExpenseController@store');
-    Route::get('{id}', 'ExpenseController@show');
-    Route::get('{id}/edit', 'ExpenseController@edit');
-    Route::patch('{id}', 'ExpenseController@update');
-    Route::delete('{id}', 'ExpenseController@destroy');
+    Route::get('{expense}', 'ExpenseController@show');
+    Route::get('{expense}/edit', 'ExpenseController@edit');
+    Route::patch('{expense}', 'ExpenseController@update');
+    Route::delete('{expense}', 'ExpenseController@destroy');
 });

@@ -2,7 +2,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(App\Expense::class, function (Faker $faker) {
+$factory->define(App\Models\Expense::class, function (Faker $faker) {
     return [
         //
     ];

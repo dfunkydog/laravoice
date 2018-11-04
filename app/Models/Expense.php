@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Expense extends Model
 {
-    protected $fillable = ['vendor', 'description', 'amount', 'type_id'];
+    protected $fillable = ['vendor', 'description', 'amount', 'type_id', 'user_id', 'paid_on', ];
     protected $with = ['type:id,name'];
 
     /**
@@ -14,7 +15,7 @@ class Expense extends Model
      */
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo(User::class);
     }
 
     /**

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>All expenses</h1>
+    <h1><a href={{ action('ExpenseController@index') }}>All expenses</a></h1>
     @if ($errors->any())
         <ul class="danger">
             @foreach ($errors->all() as $error)
@@ -16,9 +16,10 @@
                 <option value="{{ $type['id'] }}">{{ $type['name'] }}</option>
             @endforeach
         </select>
-        <div class="formfield"><label for="description">Description</label><input name="description" type="text"></div>
-        <div class="formfield"><label for="amount">amount</label><input name="amount" type="number"></div>
-        <div class="formfield"><label for="vendor">vendor</label><input name="vendor" type="text"></div>
+        <div class="formfield"><input type="date" name="paid_on" value={{old('paid_on')}}></div>
+        <div class="formfield"><label for="description">Description</label><input name="description" type="text" value={{old('description')}}></div>
+        <div class="formfield"><label for="amount">amount</label><input name="amount" type="number" step="any" value={{ old('amount') }}></div>
+        <div class="formfield"><label for="vendor">vendor</label><input name="vendor" type="text"value={{ old('vendor') }}></div>
         <div class="submit"><input type="submit" value="Save"></div>
     </form>
 @endsection

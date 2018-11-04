@@ -1,0 +1,8 @@
+body {
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 1500px) 1fr;
+}
+
+#app {
+    grid-column-start: 2;
+}

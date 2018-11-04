@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Expense;
 use App\Models\ExpenseType;
+use Carbon\Carbon;
 
 class ExpenseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,9 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::all();
+        $expenses = Expense::whereBetween('paid_on', getMonth())
+            ->get()
+            ->sortByDesc('paid_on');
 
         return view('expenses', compact('expenses'));
     }
@@ -39,12 +47,18 @@ class ExpenseController extends Controller
      */
     public function store()
     {
-        request()->validate([
+        $today = new Carbon();
+        $eod = $today->endOfDay();
+        $valid = request()->validate([
             'amount' => 'required',
-            'description' => 'required',
+            'description' => 'required | min:3',
             'type_id' => 'required',
+            'paid_on' => 'before_or_equal:' . $eod,
         ]);
-        $expense = Expense::create($request->all());
+
+        $expense = array_merge(request()->all(), ['user_id' => auth()->user()->id]);
+
+        Expense::create($expense);
 
         return redirect('/expenses/create');
     }
@@ -57,7 +71,7 @@ class ExpenseController extends Controller
      */
     public function show(Expense $expense)
     {
-        //
+        return view('expenses.show', compact('expense'));
     }
 
     /**
@@ -65,10 +79,14 @@ class ExpenseController extends Controller
      *
      * @param  \App\Expense  $expense
      * @return \Illuminate\Http\Response
+
+
      */
     public function edit(Expense $expense)
     {
-        //
+        $typeFields = ExpenseType::all();
+
+        return view('expenses.edit', compact(['typeFields', 'expense']));
     }
 
     /**
@@ -78,9 +96,11 @@ class ExpenseController extends Controller
      * @param  \App\Expense  $expense
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Expense $expense)
+    public function update(Expense $expense)
     {
-        //
+        $expense->update(request()->all());
+
+        return view('expenses/show', compact('expense'));
     }
 
     /**
@@ -91,6 +111,8 @@ class ExpenseController extends Controller
      */
     public function destroy(Expense $expense)
     {
-        //
+        $expense->delete();
+
+        return redirect('expenses');
     }
 }
