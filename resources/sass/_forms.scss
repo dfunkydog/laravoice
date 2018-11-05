@@ -1,0 +1,39 @@
+.form-group {
+    margin-bottom: 2rem;
+}
+label {
+    display: block;
+}
+input {
+    border: 1px solid $dark;
+    padding: 0.5em;
+}
+
+input[type="checkbox"] {
+    @include visuallyHidden();
+    & + label {
+        display: inline-block;
+        position: relative;
+        padding-left: 3em;
+        &::before {
+            content: " ";
+            border: 2px solid $dark;
+            position: absolute;
+            left: 0;
+            width: 1.5em;
+            height: 1.5em;
+            color: $accent;
+            text-align: center;
+        }
+    }
+    &:checked + label::after {
+        content: "";
+        position: absolute;
+        left: 0.5em;
+        width: 0.5em;
+        height: 1em;
+        border-right: 2px solid $accent;
+        border-bottom: 2px solid $accent;
+        transform: rotateZ(40deg);
+    }
+}

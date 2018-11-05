@@ -9,10 +9,25 @@ $line-height-base: 1.6;
 
 $background: #b1c8b6;
 $accent: #794c96;
-$light: #745ca8;
+$light: #fff;
 $lighter: #c2aff0;
 $dark: #3b504b;
 $darker: #22302d;
 
 $body-bg: $background;
 $font-color: $dark;
+
+/**
+* MIXINS
+**/
+@mixin visuallyHidden() {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: auto; /* new - was 1px */
+    margin: 0; /* new - was -1px */
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap; /* 1 */
+}

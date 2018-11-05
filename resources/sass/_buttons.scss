@@ -1,0 +1,12 @@
+.btn {
+    box-sizing: border-box;
+    font-size: 1em;
+    background: $accent;
+    color: $light;
+    text-decoration: none;
+    border: 1px solid $dark;
+    line-height: 2em;
+    padding: 0.5em 1em;
+    display: inline-block;
+    vertical-align: baseline;
+}

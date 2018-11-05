@@ -17,9 +17,27 @@
             @endforeach
         </select>
         <div class="formfield"><input type="date" name="paid_on" value={{old('paid_on')}}></div>
-        <div class="formfield"><label for="description">Description</label><input name="description" type="text" value={{old('description')}}></div>
-        <div class="formfield"><label for="amount">amount</label><input name="amount" type="number" step="any" value={{ old('amount') }}></div>
-        <div class="formfield"><label for="vendor">vendor</label><input name="vendor" type="text"value={{ old('vendor') }}></div>
+        <div class="formfield">
+            <label for="description">Description</label>
+            <input
+            name="description"
+            type="text"
+            value={{old('description')}}>
+        </div>
+        <div class="formfield">
+            <label for="amount">amount</label>
+            <input
+            name="amount"
+            type="number"
+            step="any"
+            value={{ old('amount') }}>
+        </div>
+        <div class="formfield">
+            <label for="vendor">vendor</label>
+            <input
+            name="vendor"
+            type="text"
+            value={{ old('vendor') }}></div>
         <div class="submit"><input type="submit" value="Save"></div>
     </form>
 @endsection
