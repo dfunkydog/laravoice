@@ -1,4 +1,5 @@
 .btn {
+    @include rounded();
     box-sizing: border-box;
     font-size: 1em;
     background: $accent;
@@ -9,4 +10,15 @@
     padding: 0.5em 1em;
     display: inline-block;
     vertical-align: baseline;
+    &--incognito {
+        background: $background;
+    }
+
+    &:focus-visible {
+        @include glow();
+    }
+    &:hover {
+        background: $accent-strong;
+        cursor: pointer;
+    }
 }

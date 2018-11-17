@@ -1,0 +1,6 @@
+.expense-details {
+    @include rounded();
+    @include dropShadow();
+    background: $background-light;
+    padding: 1em;
+}

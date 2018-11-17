@@ -7,8 +7,10 @@ $line-height-base: 1.6;
 
 // Colors
 
+$background-light: #d6e6d9;
 $background: #b1c8b6;
 $accent: #794c96;
+$accent-strong: #602f80;
 $light: #fff;
 $lighter: #c2aff0;
 $dark: #3b504b;
@@ -16,10 +18,32 @@ $darker: #22302d;
 
 $body-bg: $background;
 $font-color: $dark;
+$link-color: $darker;
+$shadow: slategray;
+$highlight: red;
 
 /**
 * MIXINS
 **/
+
+@mixin rounded() {
+    border-radius: 0.25rem;
+}
+
+@mixin glow() {
+    outline: none;
+    box-shadow: 0 0 2px $highlight;
+    border: 1px solid $highlight;
+}
+
+@mixin dropShadow($weight: normal, $color: $shadow) {
+    $drop: 0.125rem 0.125rem 0.25rem;
+    @if ($weight == heavy) {
+        $drop: 0.25rem 0.25rem 0.25rem;
+    }
+    box-shadow: $drop $color;
+}
+
 @mixin visuallyHidden() {
     border: 0;
     clip: rect(0 0 0 0);

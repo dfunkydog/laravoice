@@ -7,7 +7,7 @@ use App\User;
 
 class Expense extends Model
 {
-    protected $fillable = ['vendor', 'description', 'amount', 'type_id', 'user_id', 'paid_on', ];
+    protected $fillable = ['vendor_id', 'description', 'amount', 'type_id', 'user_id', 'paid_on', ];
     protected $with = ['type:id,name'];
 
     /**
@@ -24,5 +24,13 @@ class Expense extends Model
     public function type()
     {
         return $this->hasOne('App\Models\ExpenseType', 'id', 'type_id');
+    }
+
+    /**
+     * Get the vendor associated with this expense
+     */
+    public function vendor()
+    {
+        return $this->hasOne('App\Models\Vendor', 'id', 'vendor_id');
     }
 }

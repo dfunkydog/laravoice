@@ -11,19 +11,15 @@
 |
 */
 
-Route::get('/', 'ExpenseController@index');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+    Route::get('/category/{category}', 'CategoryController@show');
+    Route::get('/category', 'CategoryController@create');
+    Route::resource('/vendor', 'VendorController');
+    // Expenses
+    Route::resource('expense', 'ExpenseController');
+});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-// Expenses
-Route::group(['prefix' => 'expenses'], function () {
-    Route::get('/', 'ExpenseController@index');
-    Route::get('create', 'ExpenseController@create');
-    Route::post('/', 'ExpenseController@store');
-    Route::get('{expense}', 'ExpenseController@show');
-    Route::get('{expense}/edit', 'ExpenseController@edit');
-    Route::patch('{expense}', 'ExpenseController@update');
-    Route::delete('{expense}', 'ExpenseController@destroy');
-});

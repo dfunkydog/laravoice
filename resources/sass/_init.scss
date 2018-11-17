@@ -1,9 +1,14 @@
 body {
     background: $body-bg;
-    color: $dark;
+    color: $font-color;
     font-family: nunito;
 }
 
 a {
-    color: $accent;
+    text-decoration: none;
+    color: $link-color;
+}
+
+:focus-visible {
+    @include glow();
 }

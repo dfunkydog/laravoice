@@ -1,0 +1,18 @@
+.catlist {
+    &__item {
+        @include rounded();
+        display: grid;
+        grid-template-columns: 1fr auto;
+        background: $background-light;
+        padding: 0.5em;
+        box-shadow: 0 1px slategray;
+    }
+    &__count {
+        grid-row-start: 2;
+    }
+    &__amount {
+        grid-row-start: 1;
+        grid-row-end: 3;
+        font-size: 2em;
+    }
+}

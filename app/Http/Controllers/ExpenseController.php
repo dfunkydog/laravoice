@@ -24,7 +24,7 @@ class ExpenseController extends Controller
             ->get()
             ->sortByDesc('paid_on');
 
-        return view('expenses', compact('expenses'));
+        return view('expense', compact('expenses'));
     }
 
     /**
@@ -36,7 +36,7 @@ class ExpenseController extends Controller
     {
         $typeFields = ExpenseType::all();
 
-        return view('expenses.create', compact('typeFields'));
+        return view('expense.create', compact('typeFields'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ExpenseController extends Controller
 
         Expense::create($expense);
 
-        return redirect('/expenses/create');
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -71,7 +71,7 @@ class ExpenseController extends Controller
      */
     public function show(Expense $expense)
     {
-        return view('expenses.show', compact('expense'));
+        return view('expense.show', compact('expense'));
     }
 
     /**
@@ -86,7 +86,7 @@ class ExpenseController extends Controller
     {
         $typeFields = ExpenseType::all();
 
-        return view('expenses.edit', compact(['typeFields', 'expense']));
+        return view('expense.edit', compact(['typeFields', 'expense']));
     }
 
     /**
@@ -100,7 +100,7 @@ class ExpenseController extends Controller
     {
         $expense->update(request()->all());
 
-        return view('expenses/show', compact('expense'));
+        return redirect()->route('expense.show', ['expense' => $expense->id]);
     }
 
     /**
@@ -113,6 +113,6 @@ class ExpenseController extends Controller
     {
         $expense->delete();
 
-        return redirect('expenses');
+        return redirect()->route('expense.index');
     }
 }
