@@ -11,23 +11,32 @@
     @endif
     <form action={{ action( 'ExpenseController@store') }} method="post">
         @csrf
-        <select name="type_id" id="type">
-            @foreach ($typeFields as $type)
-                <option value="{{ $type['id'] }}">{{ $type['name'] }}</option>
-            @endforeach
-        </select>
-        <div class="formfield"><input type="date" name="paid_on" value={{old( 'paid_on')}}></div>
-        <div class="formfield">
+        <div class="form-group">
+            <select name="type_id" id="type">
+                @foreach ($typeFields as $type)
+                    <option value="{{ $type['id'] }}">{{ $type['name'] }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group"><input type="date" name="paid_on" value={{old( 'paid_on')}}></div>
+        <div class="form-group">
             <label for="description">Description</label>
             <input name="description" type="text" value={{old( 'description')}}>
         </div>
-        <div class="formfield">
+        <div class="form-group">
             <label for="amount">amount</label>
             <input name="amount" type="number" step="any" value={{ old( 'amount') }}>
         </div>
-        <div class="formfield">
-            <label for="vendor">vendor</label>
-            <input name="vendor" type="text" value={{ old( 'vendor') }}></div>
+        <div class="form-group">
+            <label for="vendorName">vendor</label>
+            <input list="vendors" id="vendorName" name="vendorName" type="text" value={{ old( 'vendorName') }}>
+        </div>
+        <datalist id="vendors">
+            @foreach ($vendors as $vendor)
+        <option value="{{$vendor->name}}"/>
+            @endforeach
+        </datalist>
+
         <div class="submit"><input type="submit" value="Save"></div>
     </form>
 </section>

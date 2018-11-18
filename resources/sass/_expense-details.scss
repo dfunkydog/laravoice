@@ -1,6 +1,10 @@
 .expense-details {
     @include rounded();
-    @include dropShadow();
+    @include dropShadow(wide);
     background: $background-light;
     padding: 1em;
+    &__footer {
+        padding-top: 1rem;
+        font-size: small;
+    }
 }

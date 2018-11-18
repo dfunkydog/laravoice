@@ -1,0 +1,16 @@
+.navbar {
+    background: $accent;
+    color: $white;
+    display: grid;
+    grid-template-columns: 1fr minmax(300px, 600px) 1fr;
+    .container {
+        grid-column: 2/3;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+    }
+    a {
+        color: white;
+    }
+}

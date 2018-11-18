@@ -7,14 +7,14 @@ $line-height-base: 1.6;
 
 // Colors
 
-$background-light: #d6e6d9;
-$background: #b1c8b6;
-$accent: #794c96;
-$accent-strong: #602f80;
-$light: #fff;
+$background-light: #c2c8d6;
+$background: #d8dbe2;
+$accent: #58a4b0;
+$accent-strong: #58a4b0;
+$white: #fff;
 $lighter: #c2aff0;
-$dark: #3b504b;
-$darker: #22302d;
+$dark: #373f51;
+$darker: #1b1b1e;
 
 $body-bg: $background;
 $font-color: $dark;
@@ -40,6 +40,10 @@ $highlight: red;
     $drop: 0.125rem 0.125rem 0.25rem;
     @if ($weight == heavy) {
         $drop: 0.25rem 0.25rem 0.25rem;
+    }
+    @if ($weight== wide) {
+        $drop: 0.125rem 0.125rem 0.75rem;
+        $color: transparentize($color, 0.5);
     }
     box-shadow: $drop $color;
 }

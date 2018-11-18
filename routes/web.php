@@ -13,7 +13,7 @@
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
-    Route::get('/category/{category}', 'CategoryController@show');
+    Route::get('/category/{category}', 'CategoryController@show')->name('category');
     Route::get('/category', 'CategoryController@create');
     Route::resource('/vendor', 'VendorController');
     // Expenses

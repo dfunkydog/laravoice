@@ -1,0 +1,1 @@
+<a class="cta-new" href={{ action( 'ExpenseController@create') }}>NEW</a>

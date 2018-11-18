@@ -1,10 +1,46 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class Vendor extends Model
 {
-    //
+    /**
+     * These attributes are mass assignable
+     *
+     * @var array
+     */
+    protected $fillable = ['name'];
+
+    /**
+     * No need for timestamps on this model
+     *
+     * @var boolean
+     */
+    public $timestamps = false;
+
+    /**
+     * Get expenses associated with this vendor
+     *
+     * @return Collection
+     */
+    public function getExpenses(): Collection
+    {
+        $expenses = Expense::where('vendor_id', $this->id)->get();
+
+        return $expenses;
+    }
+
+    public function syncVendor(String $name)
+    {
+        $vendorExists = $this->where('name', $name)->first();
+        if ($vendorExists) {
+            return $vendorExists->id;
+        }
+        $vendor = $this->create(['name' => $name]);
+
+        return $vendor->id;
+    }
 }

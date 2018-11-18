@@ -8,7 +8,7 @@ use App\User;
 class Expense extends Model
 {
     protected $fillable = ['vendor_id', 'description', 'amount', 'type_id', 'user_id', 'paid_on', ];
-    protected $with = ['type:id,name'];
+    protected $with = ['type:id,name', 'vendor:id,name'];
 
     /**
      * Get the user associated with this expense

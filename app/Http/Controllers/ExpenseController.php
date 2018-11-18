@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Expense;
 use App\Models\ExpenseType;
+use App\Models\Vendor;
 use Carbon\Carbon;
 
 class ExpenseController extends Controller
@@ -35,8 +36,9 @@ class ExpenseController extends Controller
     public function create()
     {
         $typeFields = ExpenseType::all();
+        $vendors = Vendor::all();
 
-        return view('expense.create', compact('typeFields'));
+        return view('expense.create', compact('typeFields', 'vendors'));
     }
 
     /**
@@ -48,7 +50,9 @@ class ExpenseController extends Controller
     public function store()
     {
         $today = new Carbon();
+        $vendor = new Vendor;
         $eod = $today->endOfDay();
+
         $valid = request()->validate([
             'amount' => 'required',
             'description' => 'required | min:3',
@@ -56,7 +60,11 @@ class ExpenseController extends Controller
             'paid_on' => 'before_or_equal:' . $eod,
         ]);
 
-        $expense = array_merge(request()->all(), ['user_id' => auth()->user()->id]);
+        $vendorId = $vendor->syncVendor(request()->get('vendorName'));
+        $expense = array_merge(
+            request()->all(),
+            ['user_id' => auth()->user()->id, 'vendor_id' => $vendorId]
+        );
 
         Expense::create($expense);
 
@@ -98,7 +106,13 @@ class ExpenseController extends Controller
      */
     public function update(Expense $expense)
     {
-        $expense->update(request()->all());
+        $expenseValues = request()->all();
+        if ($expenseValues['vendor']) {
+            $vendor = new Vendor;
+            $vendorId = $vendor->syncVendor($expenseValues['vendor']);
+        }
+        $expenseValues['vendor_id'] = $vendorId;
+        $expense->update($expenseValues);
 
         return redirect()->route('expense.show', ['expense' => $expense->id]);
     }

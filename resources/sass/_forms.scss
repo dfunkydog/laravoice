@@ -1,5 +1,10 @@
-.form-group {
+form {
+    width: 100%;
+}
+.form-group,
+.submit {
     margin-bottom: 2rem;
+    width: 100%;
 }
 label {
     display: block;
@@ -7,6 +12,16 @@ label {
 input {
     border: 1px solid $dark;
     padding: 0.5em;
+}
+input,
+select,
+textarea {
+    width: 100%;
+    max-width: 100%;
+    padding: 0.5rem;
+    background: $white;
+    border: none;
+    border: 1px solid pink;
 }
 
 input[type="checkbox"] {
@@ -30,10 +45,17 @@ input[type="checkbox"] {
         content: "";
         position: absolute;
         left: 0.5em;
+        top: 0;
         width: 0.5em;
         height: 1em;
         border-right: 2px solid $accent;
         border-bottom: 2px solid $accent;
         transform: rotateZ(40deg);
     }
+}
+
+.submit input {
+    background: $accent;
+    color: white;
+    width: fit-content;
 }

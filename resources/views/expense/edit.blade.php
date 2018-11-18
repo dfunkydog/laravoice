@@ -18,7 +18,7 @@
         <div class="formfield"><input type="date" name="paid_on" value={{$expense->paid_on}}></div>
         <div class="formfield"><label for="description">Description</label><input name="description" type="text" value={{$expense->description}}></div>
         <div class="formfield"><label for="amount">amount</label><input name="amount" type="number" step="any" value={{$expense->amount}}></div>
-        <div class="formfield"><label for="vendor">vendor</label><input name="vendor" type="text" value="{{ $expense->vendor }}"></div>
+        <div class="formfield"><label for="vendor">vendor</label><input name="vendor" type="text" value="{{ $expense->vendor->name }}"></div>
         <div class="submit"><input type="submit" value="Save"></div>
     </form>
 </section>

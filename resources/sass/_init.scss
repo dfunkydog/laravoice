@@ -2,13 +2,18 @@ body {
     background: $body-bg;
     color: $font-color;
     font-family: nunito;
+    margin: 0;
+    padding: 0;
 }
 
 a {
     text-decoration: none;
     color: $link-color;
 }
-
+sup {
+    vertical-align: super;
+    font-size: small;
+}
 :focus-visible {
     @include glow();
 }

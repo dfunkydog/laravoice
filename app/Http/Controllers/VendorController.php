@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Vendor;
 use App\Models\Expense;
-use Illuminate\Support\Facades\DB;
 
 class VendorController extends Controller
 {
@@ -16,14 +16,10 @@ class VendorController extends Controller
      */
     public function index(Expense $expense)
     {
-        $vendors = $expense->groupBy('vendor')
-        ->selectRaw('sum(amount) as total, vendor, count(id) as count')
+        $vendors = $expense->groupBy('vendor_id')
+        ->selectRaw('sum(amount) as total,vendor_id,  count(id) as count')
         ->orderBy('total', 'desc')
         ->get();
-        $vendors = DB::table('expenses')
-        ->selectRaw('DISTINCT vendor')->get()->pluck('vendor');
-        dd($vendors);
-
         $totalExpenses = $vendors->sum('total');
 
         return view('vendor', compact('vendors', 'totalExpenses'));
@@ -56,9 +52,11 @@ class VendorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Vendor $vendor)
     {
-        //
+        $expenses = $vendor->getExpenses();
+
+        return view('vendor.show', compact('vendor', 'expenses'));
     }
 
     /**

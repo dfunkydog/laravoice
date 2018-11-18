@@ -2,7 +2,6 @@
 @section('content')
 <section class="section">
     <h1>Total expenditure:for this month £{{$expenses->sum('amount') }} </h1>
-    <a href={{ action( 'ExpenseController@create') }}>NEW</a>
     <table>
         <tr>
             <th>Category</th>
@@ -22,11 +21,12 @@
                 {{$expense->description}}
             </td>
             <td>
-                {{$expense->vendor}}
+                {{$expense->vendor->name}}
             </td>
             <td> <strong>{{ $expense->paid_on }} </strong></td>
         </tr>
         @endforeach
     </table>
 </section>
+    @include('layouts.add-new')
 @endsection
