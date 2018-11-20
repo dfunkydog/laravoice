@@ -1,20 +1,23 @@
 @extends('layouts.app') 
 @section('content')
 <section class="section">
-    <h1>Total spent on {{$category->name}} £{{$expenses->sum('amount') }} </h1>
+    <h1>Total spent on {{$category->name}} {!! money($expenses->sum('amount')) !!} </h1>
+    {{$expenses->max('amount')}}
     <ul class="catlist">
         @foreach ($expenses as $expense)
         <li>
-            <a class="catlist__item" href="{{action('ExpenseController@show', ['id' => $expense->id])}}">{{strtoupper($expense->vendor->name)}}
-                <div class="catlist__count">
+            <a class="catlist__item" href="{{action('ExpenseController@show', ['id' => $expense->id])}}" style="background-size: {{ $expense->amount *100 /$expenses->max('amount')  }}% {{config( 'view.depth') }} ">
+                <strong>{{strtoupper($expense->vendor->name)}}</strong>
+                <div class="catlist__count ">
                     {{$expense->description}}
                 </div>
-                <div class="catlist__amount pill">
-                    {{$expense->amount}}
+                <div class="catlist__amount pill ">
+                {!! money($expense->amount) !!}
                 </div>
             </a>
         </li>
         @endforeach
     </ul>
 </section>
+    @include('layouts.add-new')
 @endsection

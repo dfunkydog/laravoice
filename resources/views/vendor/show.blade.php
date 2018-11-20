@@ -1,16 +1,16 @@
 @extends('layouts.app') 
 @section('content')
 <section class="section">
-    <h1>Total spent at {{$vendor->name}} £{{$expenses->sum('amount') }} </h1>
+    <h1>Total spent at {{$vendor->name}} {!! money($expenses->sum('amount')) !!} </h1>
     <ul class="catlist">
         @foreach ($expenses as $expense)
         <li>
-            <a class="catlist__item" href="{{action('ExpenseController@show', ['id' => $expense->id])}}"><strong>{{strtoupper($expense->type->name)}}</strong>
+            <a class="catlist__item" href="{{action('ExpenseController@show', ['id' => $expense->id])}}" style="background-size: {{ $expense->amount *100 /$expenses->max('amount')  }}% {{config( 'view.depth') }} "><strong>{{strtoupper($expense->type->name)}}</strong>
                 <div class="catlist__count">
                     {{$expense->description}}
                 </div>
                 <div class="catlist__amount pill">
-                    {{$expense->amount}}
+                    {!! money($expense->amount) !!}
                 </div>
             </a>
         </li>

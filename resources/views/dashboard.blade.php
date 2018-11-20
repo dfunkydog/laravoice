@@ -6,7 +6,7 @@
     <ul class="catlist">
         @foreach ($categories as $category)
         <li>
-            <a class="catlist__item" href="{{ action('CategoryController@show', ['category'=>$category->type->id]) }}">
+            <a class="catlist__item" href="{{ action('CategoryController@show', ['category'=>$category->type->id]) }}" style="background-size: {{ $category->total *100 /$categories->max('total')  }}% {{config( 'view.depth') }} ">
             <strong>{{strtoupper($category->type->name)}}</strong>
             <div class="catlist__count">{{$category->count}} items</div>
             <div class="catlist__amount pill">

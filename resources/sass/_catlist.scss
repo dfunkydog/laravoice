@@ -4,7 +4,11 @@
         display: grid;
         grid-template-columns: 1fr auto;
         padding: 0.5em 0;
-        box-shadow: 0 1px slategray;
+        border-bottom: 1px solid $shadow;
+        background-image: linear-gradient(90deg, $accent);
+        background-size: 100% 10px;
+        background-repeat: no-repeat;
+        background-position-y: bottom;
     }
     &__count {
         grid-row-start: 2;

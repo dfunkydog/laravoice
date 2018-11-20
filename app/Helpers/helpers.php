@@ -12,3 +12,12 @@ if (!function_exists('getMonth')) {
         return [$start, $end];
     }
 }
+
+if (!function_exists('money')) {
+    function money(float $amount): string
+    {
+        $formatted = number_format($amount, 2);
+
+        return '<sup>£</sup>' . $formatted;
+    }
+}
