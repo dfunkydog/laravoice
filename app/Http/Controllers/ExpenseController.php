@@ -114,7 +114,7 @@ class ExpenseController extends Controller
         $expenseValues['vendor_id'] = $vendorId;
         $expense->update($expenseValues);
 
-        return redirect()->route('expense.show', ['expense' => $expense->id]);
+        return view('expense.show', compact('expense'));
     }
 
     /**
