@@ -18,4 +18,5 @@
     </ul>
     @else No expenses yet @endif
 </section>
+    @include('layouts.add-new');
 @endsection

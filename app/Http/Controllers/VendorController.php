@@ -54,7 +54,7 @@ class VendorController extends Controller
      */
     public function show(Vendor $vendor)
     {
-        $expenses = $vendor->getExpenses();
+        $expenses = $vendor->getExpenses()->sortBy('name');
 
         return view('vendor.show', compact('vendor', 'expenses'));
     }

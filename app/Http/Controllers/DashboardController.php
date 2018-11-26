@@ -11,11 +11,17 @@ class DashboardController extends Controller
      */
     public function index(Expense $expense)
     {
-        $categories = $expense->with('type')->groupBy('type_id')
-        ->selectRaw('sum(amount) as total, type_id, count(id) as count')->get();
-
+        $categories = Expense::join('expense_types as type', 'type.id', '=', 'expenses.type_id')
+        ->selectRaw('sum(amount) as total, type_id, count(description) as count')
+            ->groupBy('type_id')
+            ->orderBy('name')
+            ->get();
         $totalExpenses = $categories->sum('total');
 
         return view('dashboard', compact('categories', 'totalExpenses'));
     }
 }
+/* $products = Shop\Product::join('shop_products_options as po', 'po.product_id', '=', 'products.id')
+   ->orderBy('po.pinned', 'desc')
+   ->select('products.*')       // just to avoid fetching anything from joined table
+   ->with('options'); */
