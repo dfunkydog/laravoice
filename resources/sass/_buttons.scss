@@ -3,7 +3,7 @@
     box-sizing: border-box;
     font-size: 1em;
     background: $accent;
-    color: $white;
+    color: $light;
     text-decoration: none;
     border: 1px solid $dark;
     line-height: 2em;
@@ -12,14 +12,15 @@
     vertical-align: baseline;
     &--incognito {
         background: inherit;
-        color: $dark;
+        color: inherit;
+        border-color: currentColor;
     }
 
     &:focus-visible {
         @include glow();
     }
     &:hover {
-        background: $accent-strong;
+        background: $background;
         cursor: pointer;
     }
 }
@@ -37,7 +38,7 @@
     margin: 0;
     padding: 0;
     text-align: center;
-    color: $white;
+    color: $light;
 }
 .cta-admin {
     color: $accent;

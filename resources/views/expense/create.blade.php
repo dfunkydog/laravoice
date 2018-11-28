@@ -1,7 +1,7 @@
 @extends('layouts.app') 
 @section('content')
 <section class="section">
-    <h1><a href={{ action( 'ExpenseController@index') }}>All expenses</a></h1>
+    <h1><a href={{ action( 'ExpenseController@index') }}>Add a new expense</a></h1>
     @if ($errors->any())
     <ul class="danger">
         @foreach ($errors->all() as $error)
@@ -12,13 +12,14 @@
     <form action={{ action( 'ExpenseController@store') }} method="post">
         @csrf
         <div class="form-group">
+            <label>Category</label>
             <select name="type_id" id="type">
                 @foreach ($typeFields as $type)
                     <option value="{{ $type['id'] }}">{{ $type['name'] }}</option>
                 @endforeach
             </select>
         </div>
-        <div class="form-group"><input type="date" name="paid_on" value={{old( 'paid_on')}}></div>
+        <div class="form-group"><label>Date</label><input type="date" name="paid_on" value={{old( 'paid_on')}}></div>
         <div class="form-group">
             <label for="description">Description</label>
             <input name="description" type="text" value={{old( 'description')}}>

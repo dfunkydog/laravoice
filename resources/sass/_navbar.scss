@@ -1,6 +1,6 @@
 .navbar {
-    background: $accent;
-    color: $white;
+    background: $dark;
+    color: $light;
     display: grid;
     grid-template-columns: 1fr minmax(300px, 600px) 1fr;
     .container {
@@ -11,6 +11,6 @@
         padding: 0 1rem;
     }
     a {
-        color: white;
+        color: $light;
     }
 }

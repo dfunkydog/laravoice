@@ -8,18 +8,18 @@ $line-height-base: 1.6;
 // Colors
 
 $background-light: #e0e3ea;
-$background: #d8dbe2;
-$accent: #58a4b0;
+$background: hsl(42.9, 100%, 60%);
+$accent: hsl(274.8, 53.2%, 36.9%);
 $accent-strong: #58a4b0;
-$white: #fff;
+$light: hsl(0, 0%, 100%);
 $lighter: #c2aff0;
-$dark: #373f51;
+$dark: hsl(0, 0%, 31.8%);
 $darker: #1b1b1e;
 
 $body-bg: $background;
 $font-color: $dark;
-$link-color: $darker;
-$shadow: slategray;
+$link-color: $dark;
+$shadow: hsl(43, 90.6%, 45.9%);
 $highlight: red;
 
 /**
