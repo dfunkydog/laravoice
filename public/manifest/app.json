@@ -5,5 +5,5 @@
     "display": "standalone",
     "background_color": "hsl(42.9, 100%, 60%)",
     "description": "A simple expense tracker",
-    "theme": "hsl(0, 0%, 31.8%)"
+    "theme_color": "hsl(0, 0%, 31.8%)"
 }
