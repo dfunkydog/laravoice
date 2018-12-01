@@ -13,6 +13,7 @@ class DashboardController extends Controller
     {
         $categories = Expense::join('expense_types as type', 'type.id', '=', 'expenses.type_id')
         ->selectRaw('sum(amount) as total, type_id, count(description) as count')
+            ->whereBetween('paid_on', getMonth())
             ->groupBy('type_id')
             ->orderBy('name')
             ->get();
@@ -21,7 +22,3 @@ class DashboardController extends Controller
         return view('dashboard', compact('categories', 'totalExpenses'));
     }
 }
-/* $products = Shop\Product::join('shop_products_options as po', 'po.product_id', '=', 'products.id')
-   ->orderBy('po.pinned', 'desc')
-   ->select('products.*')       // just to avoid fetching anything from joined table
-   ->with('options'); */

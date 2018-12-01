@@ -10,7 +10,7 @@
 
     <title>{{ config('app.name')}}</title>
     <!-- Manifest -->
-    <link rel="manifest" href="{{ asset('manifest/app.json') }}">
+    <link rel="manifest" href="{{ asset('manifests.json') }}">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">

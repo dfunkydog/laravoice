@@ -3,8 +3,8 @@
 **/
 
 body {
-  background: #d8dbe2;
-  color: #373f51;
+  background: #ffc533;
+  color: #515151;
   font-family: nunito;
   margin: 0;
   padding: 0;
@@ -12,7 +12,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #1b1b1e;
+  color: #515151;
 }
 
 sup {
@@ -71,7 +71,7 @@ table {
 }
 
 tr:nth-child(even) {
-  background: #fff;
+  background: #dfa30b;
 }
 
 th {
@@ -87,8 +87,8 @@ td.currency {
 }
 
 .navbar {
-  background: #58a4b0;
-  color: #fff;
+  background: #515151;
+  color: white;
   display: grid;
   grid-template-columns: 1fr minmax(300px, 600px) 1fr;
 }
@@ -133,9 +133,9 @@ section {
   display: grid;
   grid-template-columns: 1fr auto;
   padding: 0.5em 0;
-  border-bottom: 1px solid slategray;
-  background-image: -webkit-gradient(linear, left top, right top, from(#58a4b0));
-  background-image: linear-gradient(90deg, #58a4b0);
+  border-bottom: 1px solid #dfa30b;
+  background-image: -webkit-gradient(linear, left top, right top, from(#dfa30b));
+  background-image: linear-gradient(90deg, #dfa30b);
   background-size: 100% 10px;
   background-repeat: no-repeat;
   background-position-y: bottom;
@@ -155,9 +155,10 @@ section {
 
 .expense-details {
   border-radius: 0.25rem;
-  -webkit-box-shadow: 0.125rem 0.125rem 0.75rem rgba(112, 128, 144, 0.5);
-          box-shadow: 0.125rem 0.125rem 0.75rem rgba(112, 128, 144, 0.5);
-  background: #c2c8d6;
+  -webkit-box-shadow: 0.125rem 0.125rem 0.75rem rgba(223, 163, 11, 0.5);
+          box-shadow: 0.125rem 0.125rem 0.75rem rgba(223, 163, 11, 0.5);
+  color: white;
+  background: #515151;
   padding: 1em;
 }
 
@@ -181,7 +182,7 @@ label {
 }
 
 input {
-  border: 1px solid #373f51;
+  border: 1px solid #515151;
   padding: 0.5em;
 }
 
@@ -191,7 +192,7 @@ textarea {
   width: 100%;
   max-width: 100%;
   padding: 0.5rem;
-  background: #fff;
+  background: white;
   border: none;
   border: 1px solid pink;
 }
@@ -219,12 +220,12 @@ input[type="checkbox"] + label {
 
 input[type="checkbox"] + label::before {
   content: " ";
-  border: 2px solid #373f51;
+  border: 2px solid #515151;
   position: absolute;
   left: 0;
   width: 1.5em;
   height: 1.5em;
-  color: #58a4b0;
+  color: #662c90;
   text-align: center;
 }
 
@@ -235,14 +236,14 @@ input[type="checkbox"]:checked + label::after {
   top: 0;
   width: 0.5em;
   height: 1em;
-  border-right: 2px solid #58a4b0;
-  border-bottom: 2px solid #58a4b0;
+  border-right: 2px solid #662c90;
+  border-bottom: 2px solid #662c90;
   -webkit-transform: rotateZ(40deg);
           transform: rotateZ(40deg);
 }
 
 .submit input {
-  background: #58a4b0;
+  background: #662c90;
   color: white;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -254,10 +255,10 @@ input[type="checkbox"]:checked + label::after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-size: 1em;
-  background: #58a4b0;
-  color: #fff;
+  background: #662c90;
+  color: white;
   text-decoration: none;
-  border: 1px solid #373f51;
+  border: 1px solid #515151;
   line-height: 2em;
   padding: 0.5em 1em;
   display: inline-block;
@@ -266,7 +267,8 @@ input[type="checkbox"]:checked + label::after {
 
 .btn--incognito {
   background: inherit;
-  color: #373f51;
+  color: inherit;
+  border-color: currentColor;
 }
 
 .btn:focus-visible {
@@ -277,28 +279,28 @@ input[type="checkbox"]:checked + label::after {
 }
 
 .btn:hover {
-  background: #58a4b0;
+  background: #ffc533;
   cursor: pointer;
 }
 
 .cta-new {
-  -webkit-box-shadow: 0.25rem 0.25rem 0.25rem slategray;
-          box-shadow: 0.25rem 0.25rem 0.25rem slategray;
+  -webkit-box-shadow: 0.25rem 0.25rem 0.25rem #dfa30b;
+          box-shadow: 0.25rem 0.25rem 0.25rem #dfa30b;
   position: fixed;
   bottom: 10px;
   right: 10px;
   width: 3rem;
   height: 3rem;
-  background: #58a4b0;
+  background: #662c90;
   border-radius: 50%;
   line-height: 50px;
   margin: 0;
   padding: 0;
   text-align: center;
-  color: #fff;
+  color: white;
 }
 
 .cta-admin {
-  color: #58a4b0;
+  color: #662c90;
 }
 

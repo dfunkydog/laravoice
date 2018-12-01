@@ -1,8 +1,8 @@
 @extends('layouts.app') 
 @section('content')
 <section class="section">
-    <h1>Total expenditure for this month £{{$totalExpenses}} </h1>
     @if ($categories->count() > 0)
+    <h1>Total expenditure for this month £{{$totalExpenses}} </h1>
     <ul class="catlist">
         @foreach ($categories as $category)
         <li>
@@ -16,7 +16,9 @@
         </li>
         @endforeach
     </ul>
-    @else No expenses yet @endif
+    @else
+    <h1>No expenses recorded for this month</h1>
+    @endif
 </section>
     @include('layouts.add-new')
 @endsection
