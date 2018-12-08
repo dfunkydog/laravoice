@@ -21,7 +21,7 @@ textarea {
     padding: 0.5rem;
     background: var(--light);
     border: none;
-    border: 1px solid pink;
+    border: 1px solid var(--shadow);
 }
 
 input[type="checkbox"] {
@@ -32,7 +32,7 @@ input[type="checkbox"] {
         padding-left: 3em;
         &::before {
             content: " ";
-            border: 2px solid var(--dark);
+            border: 2px solid var(--accent);
             position: absolute;
             left: 0;
             width: 1.5em;
