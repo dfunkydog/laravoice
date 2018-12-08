@@ -1,10 +1,29 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);/**
+@import url(https://fonts.googleapis.com/css?family=Nunito);:root {
+  --font-family-sans-serif: "Nunito", sans-serif;
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+  --background-light: #e0e3ea;
+  --background: hsl(42.9, 100%, 60%);
+  --accent: hsl(274.8, 53.2%, 36.9%);
+  --accent-strong: #58a4b0;
+  --light: hsl(0, 0%, 100%);
+  --lighter: #c2aff0;
+  --dark: hsl(0, 0%, 31.8%);
+  --darker: #1b1b1e;
+  --body-bg: var(--background);
+  --font-color: var(--dark);
+  --link-color: var(--dark);
+  --shadow: hsl(43, 90.6%, 45.9%);
+  --highlight: red;
+}
+
+/**
 * MIXINS
 **/
 
 body {
-  background: #ffc533;
-  color: #515151;
+  background: var(--body-bg);
+  color: var(--font) -color;
   font-family: nunito;
   margin: 0;
   padding: 0;
@@ -12,7 +31,7 @@ body {
 
 a {
   text-decoration: none;
-  color: #515151;
+  color: var(--link) -color;
 }
 
 sup {
@@ -22,9 +41,9 @@ sup {
 
 :focus-visible {
   outline: none;
-  -webkit-box-shadow: 0 0 2px red;
-          box-shadow: 0 0 2px red;
-  border: 1px solid red;
+  -webkit-box-shadow: 0 0 2px var(--highlight);
+          box-shadow: 0 0 2px var(--highlight);
+  border: 1px solid var(--highlight);
 }
 
 h3 {
@@ -34,7 +53,7 @@ h3 {
 html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-size: 16px;
+  font-size: var(--font) -size-base;
 }
 
 *,
@@ -71,7 +90,7 @@ table {
 }
 
 tr:nth-child(even) {
-  background: #dfa30b;
+  background: var(--shadow);
 }
 
 th {
@@ -87,8 +106,8 @@ td.currency {
 }
 
 .navbar {
-  background: #515151;
-  color: white;
+  background: var(--dark);
+  color: var(--light);
   display: grid;
   grid-template-columns: 1fr minmax(300px, 600px) 1fr;
 }
@@ -108,7 +127,7 @@ td.currency {
 }
 
 .navbar a {
-  color: white;
+  color: var(--light);
 }
 
 ul {
@@ -133,9 +152,9 @@ section {
   display: grid;
   grid-template-columns: 1fr auto;
   padding: 0.5em 0;
-  border-bottom: 1px solid #dfa30b;
-  background-image: -webkit-gradient(linear, left top, right top, from(#dfa30b));
-  background-image: linear-gradient(90deg, #dfa30b);
+  border-bottom: 1px solid var(--shadow);
+  background-image: -webkit-gradient(linear, left top, right top, from(var(--background)), to(var(--shadow)));
+  background-image: linear-gradient(90deg, var(--background), var(--shadow));
   background-size: 100% 10px;
   background-repeat: no-repeat;
   background-position-y: bottom;
@@ -155,10 +174,10 @@ section {
 
 .expense-details {
   border-radius: 0.25rem;
-  -webkit-box-shadow: 0.125rem 0.125rem 0.75rem rgba(223, 163, 11, 0.5);
-          box-shadow: 0.125rem 0.125rem 0.75rem rgba(223, 163, 11, 0.5);
-  color: white;
-  background: #515151;
+  -webkit-box-shadow: 0.125rem 0.125rem 0.75rem var(--shadow);
+          box-shadow: 0.125rem 0.125rem 0.75rem var(--shadow);
+  color: var(--light);
+  background: var(--dark);
   padding: 1em;
 }
 
@@ -182,7 +201,7 @@ label {
 }
 
 input {
-  border: 1px solid #515151;
+  border: 1px solid var(--dark);
   padding: 0.5em;
 }
 
@@ -192,7 +211,7 @@ textarea {
   width: 100%;
   max-width: 100%;
   padding: 0.5rem;
-  background: white;
+  background: var(--light);
   border: none;
   border: 1px solid pink;
 }
@@ -220,12 +239,12 @@ input[type="checkbox"] + label {
 
 input[type="checkbox"] + label::before {
   content: " ";
-  border: 2px solid #515151;
+  border: 2px solid var(--dark);
   position: absolute;
   left: 0;
   width: 1.5em;
   height: 1.5em;
-  color: #662c90;
+  color: var(--accent);
   text-align: center;
 }
 
@@ -236,14 +255,14 @@ input[type="checkbox"]:checked + label::after {
   top: 0;
   width: 0.5em;
   height: 1em;
-  border-right: 2px solid #662c90;
-  border-bottom: 2px solid #662c90;
+  border-right: 2px solid var(--accent);
+  border-bottom: 2px solid var(--accent);
   -webkit-transform: rotateZ(40deg);
           transform: rotateZ(40deg);
 }
 
 .submit input {
-  background: #662c90;
+  background: var(--accent);
   color: white;
   width: -webkit-fit-content;
   width: -moz-fit-content;
@@ -255,10 +274,10 @@ input[type="checkbox"]:checked + label::after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   font-size: 1em;
-  background: #662c90;
-  color: white;
+  background: var(--accent);
+  color: var(--light);
   text-decoration: none;
-  border: 1px solid #515151;
+  border: 1px solid var(--dark);
   line-height: 2em;
   padding: 0.5em 1em;
   display: inline-block;
@@ -273,34 +292,34 @@ input[type="checkbox"]:checked + label::after {
 
 .btn:focus-visible {
   outline: none;
-  -webkit-box-shadow: 0 0 2px red;
-          box-shadow: 0 0 2px red;
-  border: 1px solid red;
+  -webkit-box-shadow: 0 0 2px var(--highlight);
+          box-shadow: 0 0 2px var(--highlight);
+  border: 1px solid var(--highlight);
 }
 
 .btn:hover {
-  background: #ffc533;
+  background: var(--background);
   cursor: pointer;
 }
 
 .cta-new {
-  -webkit-box-shadow: 0.25rem 0.25rem 0.25rem #dfa30b;
-          box-shadow: 0.25rem 0.25rem 0.25rem #dfa30b;
+  -webkit-box-shadow: 0.25rem 0.25rem 0.25rem var(--shadow);
+          box-shadow: 0.25rem 0.25rem 0.25rem var(--shadow);
   position: fixed;
   bottom: 10px;
   right: 10px;
   width: 3rem;
   height: 3rem;
-  background: #662c90;
+  background: var(--accent);
   border-radius: 50%;
   line-height: 50px;
   margin: 0;
   padding: 0;
   text-align: center;
-  color: white;
+  color: var(--light);
 }
 
 .cta-admin {
-  color: #662c90;
+  color: var(--accent);
 }
 
