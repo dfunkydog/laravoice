@@ -1,8 +1,8 @@
 .expense-details {
     @include rounded();
-    @include dropShadow(wide);
-    color: $light;
-    background: $dark;
+    @include dropShadow(wide, var(--shadow));
+    color: var(--light);
+    background: var(--dark);
     padding: 1em;
     &__footer {
         padding-top: 1rem;

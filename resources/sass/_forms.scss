@@ -10,7 +10,7 @@ label {
     display: block;
 }
 input {
-    border: 1px solid $dark;
+    border: 1px solid var(--dark);
     padding: 0.5em;
 }
 input,
@@ -19,7 +19,7 @@ textarea {
     width: 100%;
     max-width: 100%;
     padding: 0.5rem;
-    background: $light;
+    background: var(--light);
     border: none;
     border: 1px solid pink;
 }
@@ -32,12 +32,12 @@ input[type="checkbox"] {
         padding-left: 3em;
         &::before {
             content: " ";
-            border: 2px solid $dark;
+            border: 2px solid var(--dark);
             position: absolute;
             left: 0;
             width: 1.5em;
             height: 1.5em;
-            color: $accent;
+            color: var(--accent);
             text-align: center;
         }
     }
@@ -48,14 +48,14 @@ input[type="checkbox"] {
         top: 0;
         width: 0.5em;
         height: 1em;
-        border-right: 2px solid $accent;
-        border-bottom: 2px solid $accent;
+        border-right: 2px solid var(--accent);
+        border-bottom: 2px solid var(--accent);
         transform: rotateZ(40deg);
     }
 }
 
 .submit input {
-    background: $accent;
+    background: var(--accent);
     color: white;
     width: fit-content;
 }

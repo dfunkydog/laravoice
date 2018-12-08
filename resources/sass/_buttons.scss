@@ -2,10 +2,10 @@
     @include rounded();
     box-sizing: border-box;
     font-size: 1em;
-    background: $accent;
-    color: $light;
+    background: var(--accent);
+    color: var(--light);
     text-decoration: none;
-    border: 1px solid $dark;
+    border: 1px solid var(--dark);
     line-height: 2em;
     padding: 0.5em 1em;
     display: inline-block;
@@ -20,26 +20,26 @@
         @include glow();
     }
     &:hover {
-        background: $background;
+        background: var(--background);
         cursor: pointer;
     }
 }
 
 .cta-new {
-    @include dropShadow(heavy);
+    @include dropShadow(heavy, var(--shadow));
     position: fixed;
     bottom: 10px;
     right: 10px;
     width: 3rem;
     height: 3rem;
-    background: $accent;
+    background: var(--accent);
     border-radius: 50%;
     line-height: 50px;
     margin: 0;
     padding: 0;
     text-align: center;
-    color: $light;
+    color: var(--light);
 }
 .cta-admin {
-    color: $accent;
+    color: var(--accent);
 }

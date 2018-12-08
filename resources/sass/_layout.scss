@@ -1,6 +1,6 @@
 html {
     box-sizing: border-box;
-    font-size: $font-size-base;
+    font-size: var(--font)-size-base;
 }
 *,
 *:before,

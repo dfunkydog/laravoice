@@ -1,6 +1,6 @@
 body {
-    background: $body-bg;
-    color: $font-color;
+    background: var(--body-bg);
+    color: var(--font)-color;
     font-family: nunito;
     margin: 0;
     padding: 0;
@@ -8,7 +8,7 @@ body {
 
 a {
     text-decoration: none;
-    color: $link-color;
+    color: var(--link)-color;
 }
 sup {
     vertical-align: super;

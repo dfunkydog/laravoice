@@ -4,8 +4,12 @@
         display: grid;
         grid-template-columns: 1fr auto;
         padding: 0.5em 0;
-        border-bottom: 1px solid $shadow;
-        background-image: linear-gradient(90deg, $shadow);
+        border-bottom: 1px solid var(--shadow);
+        background-image: linear-gradient(
+            90deg,
+            var(--shadow),
+            var(--background)
+        );
         background-size: 100% 10px;
         background-repeat: no-repeat;
         background-position-y: bottom;
