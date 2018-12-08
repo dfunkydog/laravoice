@@ -18,6 +18,7 @@ class VendorController extends Controller
     {
         $vendors = $expense->groupBy('vendor_id')
         ->selectRaw('sum(amount) as total,vendor_id,  count(id) as count')
+        ->whereBetween('paid_on', getMonth())
         ->orderBy('total', 'desc')
         ->get();
         $totalExpenses = $vendors->sum('total');

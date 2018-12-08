@@ -9,7 +9,10 @@ class CategoryController extends Controller
 {
     public function show(ExpenseType $category)
     {
-        $expenses = Expense::where('type_id', $category->id)->get()->reverse();
+        $expenses = Expense::where('type_id', $category->id)
+            ->whereBetween('paid_on', getMonth())
+            ->get()
+            ->reverse();
 
         return view('category.show', compact('category', 'expenses'));
     }
