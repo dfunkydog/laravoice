@@ -95,8 +95,9 @@ class ExpenseController extends Controller
     public function edit(Expense $expense)
     {
         $typeFields = ExpenseType::all();
+        $descriptions = DB::table('expenses')->select('description')->distinct()->get();
 
-        return view('expense.edit', compact(['typeFields', 'expense']));
+        return view('expense.edit', compact('typeFields', 'expense', 'descriptions'));
     }
 
     /**
