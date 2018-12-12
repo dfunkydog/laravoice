@@ -6,6 +6,7 @@ use App\Models\Expense;
 use App\Models\ExpenseType;
 use App\Models\Vendor;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ExpenseController extends Controller
 {
@@ -37,8 +38,9 @@ class ExpenseController extends Controller
     {
         $typeFields = ExpenseType::all();
         $vendors = Vendor::all();
+        $descriptions = DB::table('expenses')->select('description')->distinct()->get();
 
-        return view('expense.create', compact('typeFields', 'vendors'));
+        return view('expense.create', compact('typeFields', 'vendors', 'descriptions'));
     }
 
     /**
