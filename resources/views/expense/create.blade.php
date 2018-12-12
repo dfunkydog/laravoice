@@ -22,7 +22,7 @@
         <div class="form-group"><label>Date</label><input type="date" name="paid_on" value={{old( 'paid_on')}}></div>
         <div class="form-group">
             <label for="description">Description</label>
-            <input name="description" type="text" value={{old( 'description')}}>
+            <input list="descriptions" name="description" type="text" value={{old( 'description')}}>
         </div>
         <div class="form-group">
             <label for="amount">amount</label>
@@ -35,6 +35,11 @@
         <datalist id="vendors">
             @foreach ($vendors as $vendor)
         <option value="{{$vendor->name}}"/>
+            @endforeach
+        </datalist>
+        <datalist id="descriptions">
+            @foreach ($descriptions as $description)
+        <option value="{{$description->description}}"/>
             @endforeach
         </datalist>
 
