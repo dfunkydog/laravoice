@@ -3,11 +3,11 @@
 <section class="section">
     <h1><a href={{ action( 'ExpenseController@index') }}>Add a new expense</a></h1>
     @if ($errors->any())
-    <ul class="danger">
+    <div>
         @foreach ($errors->all() as $error)
-        <li>{{$error}}</li>
+        <p class="error">{{$error}}</p>
         @endforeach
-    </ul>
+    </div>
     @endif
     <form action={{ action( 'ExpenseController@store') }} method="post">
         @csrf
