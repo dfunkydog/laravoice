@@ -3,9 +3,9 @@
 <section class="section">
     <h1><a href={{ action( 'ExpenseController@index') }}>All expenses</a></h1>
     <a href="{{URL::previous()}}">BACK</a> @if ($errors->any())
-    <ul class="danger">
+    <ul>
         @foreach ($errors->all() as $error)
-        <li>{{$error}}</li>
+        <li class="error">{$error}}</li>
         @endforeach
     </ul>
     @endif
