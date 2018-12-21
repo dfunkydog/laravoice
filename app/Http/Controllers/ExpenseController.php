@@ -12,7 +12,7 @@ class ExpenseController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->period = session('period') ?: getPeriod();
     }
 
     /**
@@ -22,7 +22,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::whereBetween('paid_on', getMonth())
+        $expenses = Expense::whereBetween('paid_on', $this->period)
             ->get()
             ->sortByDesc('paid_on');
 

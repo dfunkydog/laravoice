@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\User;
 
 class ExampleTest extends TestCase
 {
@@ -15,5 +15,12 @@ class ExampleTest extends TestCase
     public function testBasicTest()
     {
         $this->assertTrue(true);
+    }
+
+    public function testItHasExpensePage()
+    {
+        $user = new User(['name' => 'John']);
+        $this->be($user);
+        $this->get('/expense')->assertSee('expense');
     }
 }

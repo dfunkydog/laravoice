@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('expense', 'ExpenseController');
 });
 
-Auth::routes();
+Route::get('period', 'PeriodController@index')->name('period');
+Route::post('period', 'PeriodController@preset')->name('periodPreset');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();

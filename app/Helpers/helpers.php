@@ -2,19 +2,8 @@
 
 use Carbon\Carbon;
 
-if (!function_exists('getMonth')) {
-    function getMonth($date = null): array
-    {
-        $targetDate = $date ? new Carbon($date) : new Carbon();
-        $start = new Carbon($targetDate->startOfMonth());
-        $end = new Carbon($targetDate->endOfMonth());
-
-        return [$start, $end];
-    }
-}
-
-if (!function_exists('CurrentMonth')) {
-    function currentMonth($date = null): array
+if (!function_exists('getPeriod')) {
+    function getPeriod($date = null): array
     {
         $targetDate = $date ? new Carbon($date) : new Carbon();
         $start = new Carbon($targetDate->startOfMonth());

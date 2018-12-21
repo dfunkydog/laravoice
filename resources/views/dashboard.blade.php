@@ -1,4 +1,7 @@
-@extends('layouts.app') 
+@extends('layouts.app')
+@section('title')
+   Dashboard
+@endsection
 @section('content')
 <section class="section">
     @if ($categories->count() > 0)
