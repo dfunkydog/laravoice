@@ -7,10 +7,19 @@ use App\Models\Expense;
 
 class CategoryController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        $this->middleware(function ($request, $next) {
+            $this->period = session('period') ?: getPeriod();
+
+            return $next($request);
+        });
+    }
+
     public function show(ExpenseType $category)
     {
         $expenses = Expense::where('type_id', $category->id)
-            ->whereBetween('paid_on', getMonth())
+            ->whereBetween('paid_on', $this->period)
             ->get()
             ->reverse();
 

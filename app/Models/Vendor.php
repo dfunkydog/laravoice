@@ -28,7 +28,8 @@ class Vendor extends Model
      */
     public function getExpenses(): Collection
     {
-        $expenses = Expense::where('vendor_id', $this->id)->whereBetween('paid_on', getMonth())->get();
+        $period = session('period') ?: getPeriod();
+        $expenses = Expense::where('vendor_id', $this->id)->whereBetween('paid_on', $period)->get();
 
         return $expenses;
     }

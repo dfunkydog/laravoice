@@ -8,6 +8,15 @@ use App\Models\Expense;
 
 class VendorController extends Controller
 {
+    public function __construct(Request $request)
+    {
+        $this->middleware(function ($request, $next) {
+            $this->period = $request->session()->get('period') ?: getPeriod();
+
+            return $next($request);
+        });
+    }
+
     /**
      * Display a listing of the expenses by vendor.
      * This is a rough draft to be updated when model complete.
@@ -18,7 +27,7 @@ class VendorController extends Controller
     {
         $vendors = $expense->groupBy('vendor_id')
         ->selectRaw('sum(amount) as total,vendor_id,  count(id) as count')
-        ->whereBetween('paid_on', getMonth())
+        ->whereBetween('paid_on', $this->period)
         ->orderBy('total', 'desc')
         ->get();
         $totalExpenses = $vendors->sum('total');
@@ -55,7 +64,8 @@ class VendorController extends Controller
      */
     public function show(Vendor $vendor)
     {
-        $expenses = $vendor->getExpenses()->sortBy('name');
+        $expenses = $vendor->getExpenses()
+            ->sortBy('name');
 
         return view('vendor.show', compact('vendor', 'expenses'));
     }
