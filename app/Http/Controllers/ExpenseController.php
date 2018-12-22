@@ -10,9 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class ExpenseController extends Controller
 {
-    public function __construct()
+    public function __construct(Request $request)
     {
-        $this->period = session('period') ?: getPeriod();
+        $this->middleware(function ($request, $next) {
+            $this->period = session('period') ?: getPeriod();
+
+            return $next($request);
+        });
     }
 
     /**
