@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ExpenseType;
 use App\Models\Expense;
+use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {

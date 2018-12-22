@@ -7,9 +7,13 @@ use Illuminate\Support\Carbon;
 
 class PeriodController extends Controller
 {
-    public function index()
+    public function __construct(Request $request)
     {
-        return view('period');
+        $this->middleware(function ($request, $next) {
+            $this->period = session('period') ?: getPeriod();
+
+            return $next($request);
+        });
     }
 
     public function setPeriod(string $preset)
