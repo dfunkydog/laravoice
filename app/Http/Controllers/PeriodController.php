@@ -25,12 +25,32 @@ class PeriodController extends Controller
     {
         $end = Carbon::now();
         switch ($preset->preset) {
-            case 'week':
+            case '7days':
                 $start = Carbon::now()->subWeek();
 
                 break;
-            case 'year':
+            case '1mth':
+                $start = Carbon::now()->subMonth();
+
+                break;
+            case '3mths':
+                $start = Carbon::now()->subMonths(3);
+
+                break;
+            case '1year':
                 $start = Carbon::now()->subYear();
+
+                break;
+            case 'week':
+                $start = Carbon::now()->startOfWeek();
+
+                break;
+            case 'month':
+                $start = Carbon::now()->startOfMonth();
+
+                break;
+            case 'year':
+                $start = Carbon::now()->startOfYear();
 
                 break;
             default:
