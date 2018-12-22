@@ -16,6 +16,11 @@ class PeriodController extends Controller
         });
     }
 
+    public function index()
+    {
+        return view('period');
+    }
+
     public function setPeriod(string $preset)
     {
         $end = Carbon::now();
