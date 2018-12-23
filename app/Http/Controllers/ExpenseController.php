@@ -7,6 +7,7 @@ use App\Models\ExpenseType;
 use App\Models\Vendor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 class ExpenseController extends Controller
 {
