@@ -8,6 +8,7 @@
                 Dashboard
             @endauth
         </a>
+        <a href="#" class="date_range" @click="showPeriodSelect = true">Period</a>
         <a href="{{route('vendor.index')}}">Vendor</a>
         <!-- Authentication Links -->
         @guest

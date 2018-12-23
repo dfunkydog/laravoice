@@ -13,13 +13,18 @@ window.Vue = require("vue");
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-/*
-Vue.component(
-    "example-component",
-    require("./components/ExampleComponent.vue")
-);
-*/
+
+Vue.component("modal", require("./components/Modal.vue"));
+Vue.component("set-period", require("./components/SetPeriod.vue"));
 
 const app = new Vue({
-    el: "#app"
+    el: "#app",
+    data: {
+        showPeriodSelect: false
+    },
+    methods: {
+        close: function() {
+            this.showPeriodSelect = false;
+        }
+    }
 });
