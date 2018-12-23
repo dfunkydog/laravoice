@@ -1,0 +1,17 @@
+.modal__mask {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--opaque);
+}
+
+.modal__container {
+    background: var(--background);
+    padding: 20px;
+    width: 80vw;
+    max-width: 600px;
+    box-shadow: 5px 5px 30px var(--dark);
+}
