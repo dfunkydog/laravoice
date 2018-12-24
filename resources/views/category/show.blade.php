@@ -1,7 +1,7 @@
 @extends('layouts.app') 
 @section('content')
 <section class="section">
-    <h1>Total spent on {{$category->name}} £{{$expenses->sum('amount') }} </h1>
+    <h1>Total spent on {{$category->name}} {{ session('period_label') ?: 'this month'}} £{{$expenses->sum('amount') }} </h1>
     <ul class="catlist">
         @foreach ($expenses as $expense)
         <li>

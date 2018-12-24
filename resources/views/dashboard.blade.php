@@ -1,11 +1,11 @@
-@extends('layouts.app')
-@section('title')
-   Dashboard
+@extends('layouts.app') 
+@section('title') Dashboard
 @endsection
+ 
 @section('content')
 <section class="section">
     @if ($categories->count() > 0)
-    <h1>Total expenditure for this month £{{$totalExpenses}} </h1>
+    <h1>Total expenditure for {{ session('period_label') ?: 'this month'}} £{{$totalExpenses}} </h1>
     <ul class="catlist">
         @foreach ($categories as $category)
         <li>

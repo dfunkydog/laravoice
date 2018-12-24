@@ -5,12 +5,7 @@
     display: grid;
     grid-gap: 0.5em;
     grid-template-columns: repeat(auto-fill, minmax(100px, 140px));
-    button.naked {
-        border: 1px solid var(--opaque);
-        background: none;
-        cursor: pointer;
-        padding: 1em;
-        margin-bottom: 1em;
+    .btn {
         width: 100%;
     }
 }

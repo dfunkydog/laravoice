@@ -1,7 +1,7 @@
 @extends('layouts.app') 
 @section('content')
 <section class="section">
-    <h1>Total expenditure for this month {!! money($totalExpenses) !!} </h1>
+    <h1>Total expenditure for {{ session('period_label') ?: 'this month'}} {!! money($totalExpenses) !!} </h1>
     @if ($vendors->count() > 0)
     <ul class="catlist">
         @foreach ($vendors as $vendor)
@@ -18,5 +18,5 @@
     </ul>
     @else No expenses yet @endif
 </section>
-    @include('layouts.add-new');
+    @include('layouts.add-new')
 @endsection
