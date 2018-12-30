@@ -1,7 +1,8 @@
 @extends('layouts.app') 
 @section('content')
 <section class="section">
-    <h1>Total spent at {{$vendor->name}} {!! money($expenses->sum('amount')) !!} </h1>
+    <h1>Total spent at {{$vendor->name}} {{ session('period_label') ?: 'this month'}} {!! money($expenses->sum('amount')) !!}
+        </h1>
     <ul class="catlist">
         @foreach ($expenses as $expense)
         <li>

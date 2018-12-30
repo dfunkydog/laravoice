@@ -23,8 +23,9 @@
 <body>
     <div id="app">
     @include('layouts.header') @yield('content')
+        <set-period :display="showPeriodSelect" @close=close token={{ csrf_token() }}></set-period>
     </div>
-    <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix( 'js/app.js') }} "></script>
 </body>
 
 </html>

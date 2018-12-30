@@ -7,6 +7,7 @@ use App\Models\ExpenseType;
 use App\Models\Vendor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 class ExpenseController extends Controller
 {
@@ -55,9 +56,8 @@ class ExpenseController extends Controller
      */
     public function store()
     {
-        $today = new Carbon();
         $vendor = new Vendor;
-        $eod = $today->endOfDay();
+        $eod = (new Carbon())->endOfDay();
 
         $valid = request()->validate([
             'amount' => 'required',

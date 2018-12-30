@@ -1,0 +1,11 @@
+.select-period {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    display: grid;
+    grid-gap: 0.5em;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 140px));
+    .btn {
+        width: 100%;
+    }
+}

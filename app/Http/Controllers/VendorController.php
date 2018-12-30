@@ -53,7 +53,9 @@ class VendorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate(['name' => 'required']);
+
+        return response(Vendor::create($attributes));
     }
 
     /**
