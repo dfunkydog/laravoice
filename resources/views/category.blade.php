@@ -1,21 +1,27 @@
 @extends('layouts.app') 
+@section('title') Dashboard
+@endsection
+ 
 @section('content')
 <section class="section">
-    <h1>Total spent on {{$category->name}} {!! money($expenses->sum('amount') ) !!} </h1>
+    @if ($categories->count() > 0)
+    <h1>Total expenditure for {{ session('period_label') ?: 'this month'}} £{{$totalExpenses}} </h1>
     <ul class="catlist">
-        @foreach ($expenses as $expense)
-        <li class="catlist__item">
-            {{$expense->vendor}}
-            <div class="catlist__count">
-                {{$expense->vendor}}
-                <span> <strong>{{ $expense->paid_on }}: </strong></span>
-            </div>
+        @foreach ($categories as $category)
+        <li>
+            <a class="catlist__item" href="{{ action('CategoryController@show', ['category'=>$category->type->id]) }}" style="background-size: {{ $category->total *100 /$categories->max('total')  }}% {{config( 'view.depth') }} ">
+            <strong>{{strtoupper($category->type->name)}}</strong>
+            <div class="catlist__count">{{$category->count}} items</div>
             <div class="catlist__amount pill">
-                {!!money($expense->amount)!!}
+               <sup>£</sup>{{$category->total}}
             </div>
+        </a>
         </li>
         @endforeach
     </ul>
+    @else
+    <h1>No expenses recorded for this month</h1>
+    @endif
 </section>
     @include('layouts.add-new')
 @endsection

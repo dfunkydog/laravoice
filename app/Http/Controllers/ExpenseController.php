@@ -56,9 +56,8 @@ class ExpenseController extends Controller
      */
     public function store()
     {
-        $today = new Carbon();
         $vendor = new Vendor;
-        $eod = $today->endOfDay();
+        $eod = (new Carbon())->endOfDay();
 
         $valid = request()->validate([
             'amount' => 'required',

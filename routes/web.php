@@ -9,15 +9,15 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
-    Route::get('/category/{category}', 'CategoryController@show')->name('category');
-    Route::get('/category', 'CategoryController@create');
+
     Route::resource('/vendor', 'VendorController');
     // Expenses
     Route::resource('expense', 'ExpenseController');
+    Route::resource('category', 'CategoryController');
 });
 
 Route::get('period', 'PeriodController@index')->name('period');
