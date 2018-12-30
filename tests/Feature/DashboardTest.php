@@ -4,20 +4,18 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\User;
+use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class DashboardTest extends TestCase
 {
-    /**
-     * A basic test example.
-     * @test
-     *
-     * @return void
-     */
-    public function dashboard_index_has_categories()
+    use WithFaker, RefreshDatabase;
+    protected $user;
+
+    public function setup()
     {
-        $user = new User(['name' => 'John']);
-        $this->be($user);
-        $this->get('/')->assertViewHas('categories');
+        parent::setUp();
+        $this->user = factory(User::class)->create();
     }
 
     /**
@@ -28,8 +26,7 @@ class DashboardTest extends TestCase
      */
     public function dashboard_index_has_totalExpenses()
     {
-        $user = new User(['name' => 'John']);
-        $this->be($user);
-        $this->get('/')->assertViewHas('totalExpenses');
+        $this->actingAs($this->user)
+            ->get('/')->assertViewHas(['totalExpenses', 'categories']);
     }
 }
