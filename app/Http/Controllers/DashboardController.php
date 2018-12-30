@@ -10,7 +10,7 @@ class DashboardController extends Controller
     public function __construct(Request $request)
     {
         $this->middleware(function ($request, $next) {
-            $this->period = session('period') ? : getPeriod();
+            $this->period = session('period') ?: getPeriod();
 
             return $next($request);
         });

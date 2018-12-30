@@ -9,10 +9,11 @@ class DashboardTest extends TestCase
 {
     /**
      * A basic test example.
+     * @test
      *
      * @return void
      */
-    public function testHasCategories()
+    public function dashboard_index_has_categories()
     {
         $user = new User(['name' => 'John']);
         $this->be($user);
@@ -21,13 +22,14 @@ class DashboardTest extends TestCase
 
     /**
      * A basic test example.
+     * @test
      *
      * @return void
      */
-    public function testHasTotalexpenses()
+    public function dashboard_index_has_totalExpenses()
     {
         $user = new User(['name' => 'John']);
         $this->be($user);
-        $this->get('/')->assertViewHas('categories');
+        $this->get('/')->assertViewHas('totalExpenses');
     }
 }
