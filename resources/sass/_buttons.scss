@@ -15,7 +15,9 @@
         color: inherit;
         border-color: currentColor;
     }
-
+    & + .btn {
+        margin-left: 1em;
+    }
     &:focus-visible {
         @include glow();
     }

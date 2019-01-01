@@ -32,10 +32,20 @@
     <div v-show="!presetsView" class="select-calendar">
       <form action="/period/custom" method="POST">
         <input type="hidden" name="_token" :value="token">
-        <input type="date" name="start_date" :value="start">
-        <input type="date" name="end_date" :value="end">
-        <button class="btn btn" type="submit">Submit</button>
-        <button class="btn btn--incognito" type="button" @click="toggleCustom">Back to presets</button>
+        <div class="flexbox mb-1">
+          <div class="date-group">
+            <label for="start_date">Start</label>
+            <input id="start_date" type="date" name="start_date" :value="start">
+          </div>
+          <div class="date-group">
+            <label for="start_date">End</label>
+            <input id="end_date" type="date" name="end_date" :value="end">
+          </div>
+        </div>
+        <div class="flexbox mb-1">
+          <button class="btn btn" type="submit">Submit</button>
+          <button class="btn btn--incognito" type="button" @click="toggleCustom">Back to presets</button>
+        </div>
       </form>
     </div>
   </modal>

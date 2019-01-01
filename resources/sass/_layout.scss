@@ -29,3 +29,12 @@ section {
 footer {
     grid-column: 1/4;
 }
+
+.flexbox {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.mb-1 {
+    margin-bottom: 1em;
+}
