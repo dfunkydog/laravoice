@@ -23,7 +23,9 @@
 <body>
     <div id="app">
     @include('layouts.header') @yield('content')
-        <set-period :display="showPeriodSelect" @close=close token={{ csrf_token() }}></set-period>
+        <set-period :display="showPeriodSelect" :start="'{!! session('period') ? session( 'period' )[0]->format('Y-m-d') : ''!!}'"
+            :end="'{!! session('period') ? session( 'period' )[1]->format('Y-m-d') : '' !!}'" @close=close token={{ csrf_token()
+            }}></set-period>
     </div>
     <script src="{{ mix( 'js/app.js') }} "></script>
 </body>

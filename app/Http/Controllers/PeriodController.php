@@ -87,8 +87,14 @@ class PeriodController extends Controller
     {
         $start = new Carbon($request->get('start_date'));
         $end = new Carbon($request->get('end_date'));
+        $request->validate([
+            'start_date' => 'date|before:' . $end,
+            'end_date' => 'date|after:' . $start,
+        ]);
         $request->session()->put('period', [$start, $end]);
         $request->session()->put('period_label', 'from ' . $start->format('M-d') . ' to ' . $end->format('M-d'));
         $request->session()->put('period', [$start, $end]);
+
+        return redirect('/');
     }
 }
