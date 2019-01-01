@@ -6,6 +6,9 @@ form {
     margin-bottom: 2rem;
     width: 100%;
 }
+.date-group {
+    min-width: 200px;
+}
 label {
     display: block;
 }
@@ -60,7 +63,7 @@ input[type="checkbox"] {
     width: fit-content;
 }
 
-.range{
+.range {
     background: none;
     border: none;
     cursor: pointer;
