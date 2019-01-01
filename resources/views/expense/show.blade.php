@@ -5,7 +5,8 @@
     <a href="{{URL::previous()}}">Back</a> @if ($errors->any()) {{$error->all()}} @endif
     <div class="expense-details ">
         <a class="btn " href="{{action( 'ExpenseController@edit', [ 'expense'=> $expense->id])}}">EDIT</a>
-        <h3 href="{{ route('category.show', ['id'=>1]) }}">{{$expense->type->name}} - £{{$expense->amount}}
+        <h3>
+            <a href="{{ route('category.show', ['id'=> $expense->type->id]) }}">{{$expense->type->name}}</a> - £{{$expense->amount}}
         </h3>
         <p class="expense-detail__title"><a href="{{ route('vendor.show', ['id'=>$expense->vendor->id]) }}">{{$expense->vendor->name}}</a></br>
             {{$expense->description}} </p>
