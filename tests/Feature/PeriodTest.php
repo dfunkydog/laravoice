@@ -149,4 +149,21 @@ class PeriodTest extends TestCase
         $this->assertTrue(session('period')[0]->isSameDay($start));
         $this->assertTrue(session('period')[1]->isSameDay($end));
     }
+
+    /**
+     * @test
+     *
+     * @return void
+     */
+    public function end_date_must_be_after_start_date()
+    {
+        $end = Carbon::now();
+        $start = Carbon::now()->addMonth();
+        $response = $this->actingAs($this->user)
+                ->post('/period/custom', [
+                    'start_date' => $start,
+                    'end_date' => $end,
+                ]);
+        $response->assertSessionHasErrors(['start_date']);
+    }
 }

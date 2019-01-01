@@ -29,6 +29,15 @@
       </form>
       <button class="btn" @click="toggleCustom">Custom</button>
     </div>
+    <div v-show="!presetsView" class="select-calendar">
+      <form action="/period/custom" method="POST">
+        <input type="hidden" name="_token" :value="token">
+        <input type="date" name="start_date" :value="start">
+        <input type="date" name="end_date" :value="end">
+        <button class="btn btn" type="submit">Submit</button>
+        <button class="btn btn--incognito" type="button" @click="toggleCustom">Back to presets</button>
+      </form>
+    </div>
   </modal>
 </template>
 
@@ -42,6 +51,12 @@ export default {
     token: {
       type: String,
       required: true
+    },
+    start: {
+      type: String
+    },
+    end: {
+      type: String
     }
   },
   data: function() {
