@@ -10,7 +10,7 @@ class PeriodController extends Controller
     public function __construct(Request $request)
     {
         $this->middleware(function ($request, $next) {
-            $this->period = session('period') ? : getPeriod();
+            $this->period = session('period') ?: getPeriod();
 
             return $next($request);
         });
@@ -37,7 +37,8 @@ class PeriodController extends Controller
         switch ($preset->preset) {
             case '7days':
                 $start = Carbon::now()->subWeek();
-                $period_label = 'the last 7 days';
+                $period_label = 'the last week';
+
                 break;
             case '1mth':
                 $start = Carbon::now()->subMonth();
@@ -46,7 +47,7 @@ class PeriodController extends Controller
                 break;
             case '3mths':
                 $start = Carbon::now()->subMonths(3);
-                $period_label = 'the last 90 days';
+                $period_label = 'the last 3 months';
 
                 break;
             case '1year':
@@ -80,5 +81,14 @@ class PeriodController extends Controller
         $preset->flash('message', 'Date range updated');
 
         return redirect('/');
+    }
+
+    public function customise(Request $request)
+    {
+        $start = new Carbon($request->get('start_date'));
+        $end = new Carbon($request->get('end_date'));
+        $request->session()->put('period', [$start, $end]);
+        $request->session()->put('period_label', 'from ' . $start->format('M-d') . ' to ' . $end->format('M-d'));
+        $request->session()->put('period', [$start, $end]);
     }
 }

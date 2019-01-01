@@ -1,7 +1,7 @@
 <template>
   <modal :display="display" @close="close">
     <h3>Set the display time period</h3>
-    <div class="select-period">
+    <div v-show="presetsView" class="select-period">
       <form action="/period" method="POST">
         <input type="hidden" name="_token" :value="token">
         <input type="hidden" name="preset" value="7days">
@@ -27,18 +27,43 @@
         <input type="hidden" name="preset" value="week">
         <button class="btn btn--incognito" type="submit">This week</button>
       </form>
+      <button class="btn" @click="toggleCustom">Custom</button>
     </div>
   </modal>
 </template>
 
 <script>
 export default {
-  props: ["display", "token"],
+  props: {
+    display: {
+      type: Boolean,
+      default: false
+    },
+    token: {
+      type: String,
+      required: true
+    }
+  },
+  data: function() {
+    return {
+      showCalendars: false
+    };
+  },
+  computed: {
+    presetsView: function() {
+      return !this.showCalendars;
+    }
+  },
   methods: {
     close: function() {
       this.$emit("close");
     },
-    postPeriod: function() {}
+    postPeriod: function() {},
+    toggleCustom: function() {
+      console.log(this.showCalendars);
+      this.showCalendars = !this.showCalendars;
+      console.log(this.showCalendars);
+    }
   }
 };
 </script>

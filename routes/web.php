@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Route::get('period', 'PeriodController@index')->name('period');
+Route::post('period/custom', 'PeriodController@customise')->name('periodCustomise');
 Route::post('period', 'PeriodController@preset')->name('periodPreset');
 
 Auth::routes();
