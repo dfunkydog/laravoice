@@ -10,7 +10,7 @@
 
     <title>{{ config('app.name')}} - @yield('title')</title>
     <!-- Manifest -->
-    <link rel="manifest" href="{{ asset('manifests.json') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">

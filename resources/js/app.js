@@ -5,7 +5,8 @@
  */
 
 require("./bootstrap");
-
+import Modal from "./components/Modal";
+import SetPeriod from "./components/SetPeriod";
 window.Vue = require("vue");
 
 /**
@@ -14,8 +15,8 @@ window.Vue = require("vue");
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component("modal", require("./components/Modal.vue"));
-Vue.component("set-period", require("./components/SetPeriod.vue"));
+Vue.component("modal", Modal);
+Vue.component("set-period", SetPeriod);
 
 const app = new Vue({
     el: "#app",
