@@ -25,6 +25,24 @@ textarea {
     background: var(--light);
     border: none;
     border: 1px solid var(--shadow);
+    &:focus {
+        border-color: var(--shadow);
+    }
+}
+
+.is-error {
+    input,
+    select,
+    textarea {
+        border-color: var(--error);
+        &:focus {
+            border-color: var(--shadow);
+        }
+    }
+}
+
+.is-error-message {
+    color: var(--error);
 }
 
 input[type="checkbox"] {
