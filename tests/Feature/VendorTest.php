@@ -21,6 +21,26 @@ class Vendor extends TestCase
     }
 
     /**
+    * @test
+    */
+    public function index_passes_variables_to_view()
+    {
+        $vendorId = factory(vendorModel::class)->create()->id;
+        $this->actingAs($this->user)
+            ->get('vendor')->assertViewHas(['vendors', 'totalExpenses']);
+    }
+
+    /**
+    * @test
+    */
+    public function show_passes_variables_to_view()
+    {
+        $vendorId = factory(vendorModel::class)->create()->id;
+        $this->actingAs($this->user)
+            ->get("vendor/{$vendorId}")->assertViewHas(['vendor', 'expenses']);
+    }
+
+    /**
      * User can create a vendor
      *
      * @test
@@ -35,15 +55,5 @@ class Vendor extends TestCase
         $this->actingAs($this->user)->post('vendor', $attributes);
 
         $this->assertDatabaseHas('vendors', $attributes);
-    }
-
-    /**
-    * @test
-    */
-    public function show_passes_variables_to_view()
-    {
-        $vendorId = factory(vendorModel::class)->create()->id;
-        $this->actingAs($this->user)
-            ->get("vendor/{$vendorId}")->assertViewHas(['vendor', 'expenses']);
     }
 }
