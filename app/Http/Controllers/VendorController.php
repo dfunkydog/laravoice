@@ -23,13 +23,9 @@ class VendorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Expense $expense)
+    public function index(Expense $expense, Request $request)
     {
-        $vendors = $expense->groupBy('vendor_id')
-        ->selectRaw('sum(amount) as total,vendor_id,  count(id) as count')
-        ->whereBetween('paid_on', $this->period)
-        ->orderBy('total', 'desc')
-        ->get();
+        $vendors = $expense->vendors($request);
         $totalExpenses = $vendors->sum('total');
 
         return view('vendor', compact('vendors', 'totalExpenses'));
