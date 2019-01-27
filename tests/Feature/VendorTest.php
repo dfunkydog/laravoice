@@ -21,6 +21,23 @@ class Vendor extends TestCase
     }
 
     /**
+     * @test
+     */
+    public function vendor_page_returns_200()
+    {
+        $vendorId = factory(vendorModel::class)->create()->id;
+        $this->actingAs($this->user)->get('vendor/' . $vendorId)->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function vendor_show_page_returns_200()
+    {
+        $this->actingAs($this->user)->get('vendor')->assertStatus(200);
+    }
+
+    /**
     * @test
     */
     public function index_passes_variables_to_view()
