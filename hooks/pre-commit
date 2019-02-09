@@ -23,14 +23,14 @@ exec 1>&2
 
 #### Test prospective commit
 STASH_NAME="pre-commit-$(date +%s)"
+echo "\nstashing local changes"
 git stash save -q --keep-index $STASH_NAME
 
+echo "\nRun php tests"
 exec /home/michael/.local/bin/phpunit
 
-STASHES=$(git stash list)
-if [[ $STASHES == "$STASH_NAME" ]]; then
-  git stash pop -q
-fi
+echo "\nApply local changes"
+git stash apply stash^{$STASH_NAME}
 #### End Test prospective commit
 
 
