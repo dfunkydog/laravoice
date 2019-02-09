@@ -27,7 +27,7 @@ echo "\nstashing local changes"
 git stash save -q --keep-index $STASH_NAME
 
 echo "\nRun php tests"
-exec /home/michael/.local/bin/phpunit
+/home/michael/projects/expenses/vendor/bin/phpunit
 
 echo "\nApply local changes"
 git stash apply stash^{$STASH_NAME}
