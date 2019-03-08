@@ -2,6 +2,7 @@
   <div class="modal__mask" @click="close" v-if="display">
     <transition appear name="modal">
       <div class="modal__container" @click.stop>
+        <slot name="title">Title</slot>
         <slot></slot>
       </div>
     </transition>

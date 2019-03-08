@@ -22,15 +22,4 @@
         </form>
         @endguest
     </div>
-    <div>
-        @if(Session::has('success_message'))
-            {{ Session::get('success_message') }}
-        @endif
-        @if(Session::has('error_message'))
-            {{ Session::get('error_message') }}
-        @endif
-        @if(Session::has('message'))
-            {{ Session::get('message') }}
-        @endif
-    </div>
 </nav>

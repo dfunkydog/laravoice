@@ -62,7 +62,7 @@ class ExpenseController extends Controller
         $valid = request()->validate([
             'amount' => 'required',
             'description' => 'required | min:3',
-            'type_id' => 'required',
+            'type_id' => 'required | integer',
             'paid_on' => 'before_or_equal:' . $eod,
         ]);
 

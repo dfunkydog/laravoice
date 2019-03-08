@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class Expense extends Model
 {
@@ -53,5 +54,12 @@ class Expense extends Model
         ->sortBy(function ($vendor) {
             return $vendor->vendor->name;
         });
+    }
+
+    public function recurExpense()
+    {
+        $cloned = $this->replicate();
+        $cloned->paid_on = Carbon::now();
+        $cloned->save();
     }
 }
