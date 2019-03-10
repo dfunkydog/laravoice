@@ -17,6 +17,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/vendor', 'VendorController');
     // Expenses
     Route::resource('expense', 'ExpenseController');
+    Route::resource('recurring', 'RecurringExpenseController');
     Route::resource('category', 'CategoryController');
 });
 
