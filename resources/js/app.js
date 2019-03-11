@@ -8,6 +8,7 @@ require("./bootstrap");
 import Modal from "./components/Modal";
 import SetPeriod from "./components/SetPeriod";
 window.Vue = require("vue");
+window.Event = new Vue();
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

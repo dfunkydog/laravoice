@@ -1,6 +1,6 @@
 <template>
   <modal :display="display" @close="close">
-    <h3>Set the display time period</h3>
+    <h3 slot="title">Set the display time period</h3>
     <div v-show="presetsView" class="select-period">
       <form action="/period" method="POST">
         <input type="hidden" name="_token" :value="token">
