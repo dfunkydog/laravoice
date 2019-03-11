@@ -56,11 +56,13 @@ class Expense extends Model
         });
     }
 
-    public function recurExpense()
+    public function recur()
     {
         $cloned = $this->replicate();
         $cloned->paid_on = Carbon::now();
         $cloned->is_recurring = true;
         $cloned->save();
+
+        return $cloned;
     }
 }

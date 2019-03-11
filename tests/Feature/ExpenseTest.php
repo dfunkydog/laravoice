@@ -105,4 +105,14 @@ class Expense extends TestCase
         $expense = factory('App\Models\Expense')->raw(['vendorName' => '']);
         $this->actingAs($this->user)->post('expense', $expense)->assertSessionHasNoErrors('vendorName');
     }
+
+    /**
+    * @test
+    */
+    public function a_recurred_expense_must_be_flagged_as_recurring()
+    {
+        $parentExpense = factory('App\Models\Expense')->create(['is_recurring' => false]);
+        $generatedExpense = $parentExpense->recur();
+        $this->assertTrue($generatedExpense->is_recurring);
+    }
 }
