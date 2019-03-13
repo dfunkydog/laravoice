@@ -33,7 +33,7 @@ class ProcessRecurringExpenses implements ShouldQueue
         $current = RecurringExpense::current()->with('expense')->get()
             ->pluck('expense')
             ->each(function ($item) {
-                $item->recurs();
+                $item->recur();
             });
 
         return $current;

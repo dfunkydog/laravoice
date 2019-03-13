@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\RecurringExpense;
 use Illuminate\Http\Request;
-use App\Jobs\ProcessRecurringExpenses;
 
 class RecurringExpenseController extends Controller
 {
@@ -15,7 +14,7 @@ class RecurringExpenseController extends Controller
      */
     public function index()
     {
-        return RecurringExpense::current()->with('expense')->get();
+        return RecurringExpense::all();
     }
 
     /**
