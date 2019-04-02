@@ -14,6 +14,6 @@ class ExpenseServices
 
     public function getDescriptions()
     {
-        return Expenses::distinct('description')->get();
+        return Expense::distinct('description')->get();
     }
 }
