@@ -14,9 +14,8 @@
 Route::middleware(['auth'])->group(function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
-    Route::resource('/vendor', 'VendorController');
-    // Expenses
     Route::resource('expense', 'ExpenseController');
+    Route::resource('vendor', 'VendorController');
     Route::resource('recurring', 'RecurringExpenseController');
     Route::resource('category', 'CategoryController');
 });

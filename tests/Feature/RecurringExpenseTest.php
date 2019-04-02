@@ -22,6 +22,17 @@ class RecurringExpense extends TestCase
 
     /**
      * @test
+     *
+     * @return void
+     */
+    public function recurring_expense_index_returns_200()
+    {
+        $this->actingAs($this->user);
+        $this->get('/recurring')->assertStatus(200);
+    }
+
+    /**
+     * @test
      */
     public function a_user_can_create_recurring_expense()
     {
