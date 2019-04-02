@@ -26,4 +26,9 @@ class RecurringExpense extends Model
                 ->orWhere('end_date', null);
             });
     }
+
+    public function list()
+    {
+        return $this->with('expense')->orderby('day_of_month')->get();
+    }
 }

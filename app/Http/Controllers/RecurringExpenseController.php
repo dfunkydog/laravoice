@@ -14,7 +14,9 @@ class RecurringExpenseController extends Controller
      */
     public function index()
     {
-        return RecurringExpense::all();
+        $items =  RecurringExpense::with('expense')->orderBy('day_of_month')->get();
+
+        return view('recurring', compact('items'));
     }
 
     /**

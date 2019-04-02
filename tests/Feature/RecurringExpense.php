@@ -10,11 +10,12 @@ class RecurringExpense extends TestCase
 {
     /**
      * A basic test example.
+     * @test
      *
      * @return void
      */
-    public function testExample()
+    public function recurring_expense_index_returns_200()
     {
-        $this->assertTrue(true);
+        $this->get('/recurring')->assertStatus(200);
     }
 }

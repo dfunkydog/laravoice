@@ -8,16 +8,25 @@ use App\Models\Vendor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
+use App\Services\ExpenseServices;
 
 class ExpenseController extends Controller
 {
-    public function __construct(Request $request)
+    /**
+     * Implementes ExpenseServices
+     *
+     * @var ExpenseServices
+     */
+    protected $expenses;
+
+    public function __construct(Request $request, ExpenseServices $expenses)
     {
         $this->middleware(function ($request, $next) {
             $this->period = session('period') ?: getPeriod();
 
             return $next($request);
         });
+        $this->expenses= $expenses;
     }
 
     /**
@@ -27,9 +36,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = Expense::whereBetween('paid_on', $this->period)
-            ->get()
-            ->sortByDesc('paid_on');
+        $expenses =$this->expenses->getBetween($this->period);
 
         return view('expense', compact('expenses'));
     }
@@ -43,7 +50,7 @@ class ExpenseController extends Controller
     {
         $typeFields = ExpenseType::all();
         $vendors = Vendor::all();
-        $descriptions = DB::table('expenses')->select('description')->distinct()->get();
+        $descriptions = $this->expenses->getDescriptions();
 
         return view('expense.create', compact('typeFields', 'vendors', 'descriptions'));
     }
