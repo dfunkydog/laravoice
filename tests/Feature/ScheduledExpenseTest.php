@@ -90,24 +90,12 @@ class ScheduledExpense extends TestCase
     /**
     * @test
     */
-    public function current_scope_returns_weekly_scheduled_expenses_due_today()
+    public function current_scope_returns_monthly_and_weekly_scheduled_expenses_due_today()
     {
-        $bar =Carbon::now();
-        $foo = (new Carbon)->subDay(1)->dayOfWeekIso;
-        factory(Scheduled::class, 3)->create(['scheduled_day' => (new Carbon)->dayOfWeekIso,'schedule_pattern_id'=>2]);
-        factory(Scheduled::class, 3)->create(['scheduled_day' => (new Carbon)->subDay(1)->dayOfWeekIso, 'schedule_pattern_id'=>2]);
-        $expenses = Scheduled::current()->get()->count();
-
-        $this->assertEquals(3, $expenses);
-    }
-
-    /**
-    * @test
-    */
-    public function current_scope_returns_monthly_scheduled_expenses_due_today()
-    {
-        factory(Scheduled::class, 3)->create(['scheduled_day' => (new Carbon)->day, 'schedule_pattern_id'=>1]);
-        factory(Scheduled::class, 3)->create(['scheduled_day' => (new Carbon)->subDay(1)->day, 'schedule_pattern_id'=>1]);
+        factory(Scheduled::class, 1)->create(['scheduled_day' => (new Carbon)->day, 'schedule_pattern_id'=>1]);
+        factory(Scheduled::class, 2)->create(['scheduled_day' => (new Carbon)->dayOfWeekIso,'schedule_pattern_id'=>2]);
+        factory(Scheduled::class, 4)->create(['scheduled_day' => (new Carbon)->subDay(1)->day, 'schedule_pattern_id'=>1]);
+        factory(Scheduled::class, 8)->create(['scheduled_day' => (new Carbon)->subDay(1)->dayOfWeekIso, 'schedule_pattern_id'=>2]);
         $expenses = Scheduled::current()->get()->count();
 
         $this->assertEquals(3, $expenses);
