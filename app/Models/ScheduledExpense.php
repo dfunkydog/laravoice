@@ -26,7 +26,8 @@ class ScheduledExpense extends Model
         $today = new Carbon();
 
         return $query->where('scheduled_day', '=', $today->day)
-            ->whereRaw('scheduled_day = DAYOFMONTH(UTC_DATE) OR scheduled_day = WEEKDAY(UTC_DATE)+1')
+            ->whereRaw('(scheduled_day = DAYOFMONTH(NOW()) AND schedule_pattern_id = 1)
+                OR (scheduled_day = WEEKDAY(UTC_DATE)+1 AND schedule_pattern_id = 2)')
             ->where(function ($query) use ($today) {
                 $query
                 ->whereDate('end_date', '>=', $today)
