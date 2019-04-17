@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RecurringExpense;
+use App\Models\ScheduledExpense;
 use Illuminate\Http\Request;
 
-class RecurringExpenseController extends Controller
+class ScheduledExpenseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class RecurringExpenseController extends Controller
      */
     public function index()
     {
-        $items =  RecurringExpense::with('expense')->orderBy('day_of_month')->get();
-
-        return view('recurring', compact('items'));
+        //$items =  (new ScheduledExpense)->list();
+        $items = ScheduledExpense::current()->get();
+        return view('scheduled', compact('items'));
     }
 
     /**
@@ -39,9 +39,10 @@ class RecurringExpenseController extends Controller
     {
         $valid = $request->validate([
             'parent_expense_id' => 'integer',
-            'day_of_month' => 'integer|min:1|max:31',
+            'scheduled_day' => 'integer|min:1|max:31',
+            'schedule_pattern_id' => 'integer',
         ]);
-        $recur = RecurringExpense::create($request->all());
+        $scheduled = ScheduledExpense::create($request->all());
 
         return redirect()->route('dashboard');
     }
@@ -49,10 +50,10 @@ class RecurringExpenseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\RecurringExpense  $recurringExpense
+     * @param  \App\ScheduledExpense  $scheduledExpense
      * @return \Illuminate\Http\Response
      */
-    public function show(RecurringExpense $recurringExpense)
+    public function show(ScheduledExpense $scheduledExpense)
     {
         //
     }
@@ -60,10 +61,10 @@ class RecurringExpenseController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\RecurringExpense  $recurringExpense
+     * @param  \App\ScheduledExpense  $scheduledExpense
      * @return \Illuminate\Http\Response
      */
-    public function edit(RecurringExpense $recurringExpense)
+    public function edit(ScheduledExpense $scheduledExpense)
     {
         //
     }
@@ -72,10 +73,10 @@ class RecurringExpenseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\RecurringExpense  $recurringExpense
+     * @param  \App\ScheduledExpense  $scheduledExpense
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RecurringExpense $recurringExpense)
+    public function update(Request $request, ScheduledExpense $scheduledExpense)
     {
         //
     }
@@ -83,10 +84,10 @@ class RecurringExpenseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\RecurringExpense  $recurringExpense
+     * @param  \App\ScheduledExpense  $scheduledExpense
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RecurringExpense $recurringExpense)
+    public function destroy(ScheduledExpense $scheduledExpense)
     {
         //
     }

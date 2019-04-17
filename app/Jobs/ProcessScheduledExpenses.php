@@ -2,14 +2,14 @@
 
 namespace App\Jobs;
 
-use App\Models\RecurringExpense;
+use App\Models\ScheduledExpense;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
-class ProcessRecurringExpenses implements ShouldQueue
+class ProcessScheduledExpenses implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -30,10 +30,10 @@ class ProcessRecurringExpenses implements ShouldQueue
      */
     public function handle()
     {
-        $current = RecurringExpense::current()->with('expense')->get()
+        $current = ScheduledExpense::current()->with('expense')->get()
             ->pluck('expense')
             ->each(function ($item) {
-                $item->recur();
+                $item->scheduled();
             });
 
         return $current;

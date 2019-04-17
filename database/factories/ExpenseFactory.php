@@ -19,6 +19,6 @@ $factory->define(App\Models\Expense::class, function (Faker $faker) {
         'vendor_id' => function () {
             return factory(Vendor::class)->create();
         },
-        'is_recurring' => $faker->boolean(25),
+        'is_scheduled' => $faker->boolean(25),
     ];
 });
