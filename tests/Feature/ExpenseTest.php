@@ -109,10 +109,10 @@ class Expense extends TestCase
     /**
     * @test
     */
-    public function a_recurred_expense_must_be_flagged_as_recurring()
+    public function a_recurred_expense_must_be_flagged_as_scheduled()
     {
-        $parentExpense = factory('App\Models\Expense')->create(['is_recurring' => false]);
-        $generatedExpense = $parentExpense->recur();
-        $this->assertTrue($generatedExpense->is_recurring);
+        $parentExpense = factory('App\Models\Expense')->create(['is_scheduled' => false]);
+        $generatedExpense = $parentExpense->scheduled();
+        $this->assertTrue($generatedExpense->is_scheduled);
     }
 }

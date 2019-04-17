@@ -9,7 +9,7 @@ use Illuminate\Support\Carbon;
 
 class Expense extends Model
 {
-    protected $fillable = ['vendor_id', 'description', 'amount', 'type_id', 'user_id', 'paid_on', 'is_recurring'];
+    protected $fillable = ['vendor_id', 'description', 'amount', 'type_id', 'user_id', 'paid_on', 'is_scheduled'];
     protected $with = ['type:id,name', 'vendor:id,name'];
 
     private function period(Request $request)
@@ -56,11 +56,11 @@ class Expense extends Model
         });
     }
 
-    public function recur()
+    public function scheduled()
     {
         $cloned = $this->replicate();
         $cloned->paid_on = Carbon::now();
-        $cloned->is_recurring = true;
+        $cloned->is_scheduled = true;
         $cloned->save();
 
         return $cloned;

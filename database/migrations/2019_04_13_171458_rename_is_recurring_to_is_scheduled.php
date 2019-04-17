@@ -3,8 +3,9 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Grammars\RenameColumn;
 
-class ChangeExpenseVendorsToVendorId extends Migration
+class RenameIsRecurringToIsScheduled extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +14,9 @@ class ChangeExpenseVendorsToVendorId extends Migration
      */
     public function up()
     {
-        DB::statement(
-        'UPDATE expenses
-        LEFT JOIN vendors ON expenses.vendor = vendors.name
-        SET expenses.vendor_id = vendors.id
-        WHERE expenses.vendor = vendors.name'
-        );
+        Schema::table('expenses', function (Blueprint $table) {
+            $table->renameColumn('is_recurring', 'is_scheduled');
+        });
     }
 
     /**
@@ -29,7 +27,8 @@ class ChangeExpenseVendorsToVendorId extends Migration
     public function down()
     {
         Schema::table('expenses', function (Blueprint $table) {
-            //$table->update(['vendor_id' => 0]);
+            $table->renameColumn('is_scheduled', 'is_recurring');
+            //
         });
     }
 }

@@ -19,6 +19,31 @@ class DashboardTest extends TestCase
     }
 
     /**
+     * Unauthorized user.
+     * @test
+     *
+     * @return void
+     */
+    public function unauthorized_user_is_redirected()
+    {
+        $response = $this->call('GET', '/');
+
+        $this->assertEquals(302, $response->getStatusCode());
+    }
+
+    /**
+     * variables passed to view.
+     * @test
+     *
+     * @return void
+     */
+    public function dashboard_index_passes_variables()
+    {
+        $this->actingAs($this->user);
+        $this->get('/')->assertViewHas(['totalExpenses', 'categories']);
+    }
+
+    /**
      * A basic test example.
      * @test
      *
