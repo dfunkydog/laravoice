@@ -25,8 +25,7 @@ class ScheduledExpense extends Model
     {
         $today = new Carbon();
 
-        return $query->where('scheduled_day', '=', $today->day)
-            ->whereRaw('(scheduled_day = DAYOFMONTH(NOW()) AND schedule_pattern_id = 1)
+        return $query->whereRaw('(scheduled_day = DAYOFMONTH(UTC_DATE) AND schedule_pattern_id = 1)
                 OR (scheduled_day = WEEKDAY(UTC_DATE)+1 AND schedule_pattern_id = 2)')
             ->where(function ($query) use ($today) {
                 $query
@@ -34,23 +33,6 @@ class ScheduledExpense extends Model
                 ->orWhere('end_date', null);
             });
     }
-
- /*   public function scopeCurrent($query)
-    {
-        $today = new Carbon();
-        $results = DB::table('scheduled_expenses')
-            ->join('schedule_patterns', 'schedule_pattern_id', 'schedule_patterns.id')
-            ->join('expenses', 'parent_expense_id', 'expenses.id')
-            ->join('vendors', 'expenses.vendor_id', 'vendors.id')
-            ->select('scheduled_expenses.scheduled_day', 'schedule_patterns.pattern', 'expenses.description', 'expenses.amount', 'expenses.id', 'vendors.name')
-            ->where(function ($query) use ($today) {
-                $query
-                ->whereDate('end_date', '>=', $today)
-                ->orWhere('end_date', null);
-            })
-            ->whereRaw('scheduled_day = DAYOFMONTH(NOW()) OR scheduled_day = WEEKDAY(NOW())');
-        return $results;
-    } */
 
     public function list()
     {
