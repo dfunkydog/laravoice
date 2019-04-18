@@ -7,6 +7,8 @@
 #
 # To enable this hook, rename this file to "pre-commit".
 
+BASE="../"
+
 if git rev-parse --verify HEAD >/dev/null 2>&1
 then
 	against=HEAD
@@ -27,7 +29,7 @@ echo "\nstashing local changes"
 git stash save -q --keep-index $STASH_NAME
 
 echo "\nRun php tests"
-/home/michael/projects/expenses/vendor/bin/phpunit
+$BASE/vendor/bin/phpunit
 
 echo "\nApply local changes"
 git stash apply stash^{$STASH_NAME}
