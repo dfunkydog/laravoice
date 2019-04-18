@@ -32,7 +32,7 @@ echo "\nRun php tests"
 $BASE/vendor/bin/phpunit
 
 echo "\nApply local changes"
-git stash apply stash^{$STASH_NAME}
+git stash apply stash^{/$STASH_NAME}
 #### End Test prospective commit
 
 
