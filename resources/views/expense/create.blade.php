@@ -39,7 +39,7 @@
             @endforeach
         </datalist>
 
-        <div class="submit"><input type="submit" value="Save"></div>
+        <div class="submit" onsubmit="this.disabled=true"><input type="submit" value="Save"></div>
     </form>
 </section>
 @endsection

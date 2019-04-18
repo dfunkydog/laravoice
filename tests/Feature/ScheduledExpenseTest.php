@@ -34,6 +34,17 @@ class ScheduledExpense extends TestCase
 
     /**
      * @test
+     *
+     * @return void
+     */
+    public function scheduled_expense_list_returns_200()
+    {
+        $this->actingAs($this->user);
+        $this->get('/scheduled/list')->assertStatus(200);
+    }
+
+    /**
+     * @test
      */
     public function a_user_can_create_scheduled_expense()
     {

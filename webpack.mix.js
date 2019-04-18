@@ -1,5 +1,6 @@
 const mix = require("laravel-mix");
-
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+    .BundleAnalyzerPlugin;
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -20,4 +21,8 @@ mix.options({}).sourceMaps(true, "source-map");
 
 mix.browserSync({
     proxy: "expenses.local"
+});
+
+mix.webpackConfig({
+    plugins: [new BundleAnalyzerPlugin()]
 });

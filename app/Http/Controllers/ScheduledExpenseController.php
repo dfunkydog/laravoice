@@ -14,8 +14,17 @@ class ScheduledExpenseController extends Controller
      */
     public function index()
     {
-        //$items =  (new ScheduledExpense)->list();
         $items = ScheduledExpense::current()->get();
+        return view('scheduled', compact('items'));
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function list()
+    {
+        $items = (new ScheduledExpense)->list();
         return view('scheduled', compact('items'));
     }
 
