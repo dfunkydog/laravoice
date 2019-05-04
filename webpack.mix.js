@@ -1,6 +1,12 @@
 const mix = require("laravel-mix");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
     .BundleAnalyzerPlugin;
+require("dotenv").config();
+
+const analyzerMode =
+    process.env.NODE_ENV == "production" ? "disabled" : "server";
+console.log(process.env.NODE_ENV);
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -24,5 +30,9 @@ mix.browserSync({
 });
 
 mix.webpackConfig({
-    plugins: [new BundleAnalyzerPlugin()]
+    plugins: [
+        new BundleAnalyzerPlugin({
+            analyzerMode
+        })
+    ]
 });
