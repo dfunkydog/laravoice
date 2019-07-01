@@ -5,7 +5,6 @@ require("dotenv").config();
 
 const analyzerMode =
     process.env.NODE_ENV == "production" ? "disabled" : "server";
-console.log(process.env.NODE_ENV);
 
 /*
  |--------------------------------------------------------------------------
