@@ -7,6 +7,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ScheduledExpenseNotification;
+use App\User;
 
 class SendScheduledNotification
 {
@@ -28,6 +29,9 @@ class SendScheduledNotification
      */
     public function handle(ScheduledExpensesProcessed $event)
     {
-        Mail::to(env('SCHEDULED_NOTIFICATION_RECIPIENT')) ->cc(env('SCHEDULED_NOTIFICATION_CC'))->send(new ScheduledExpenseNotification($event->expenses));
+        $to = User::where('email', 'michael@416studios.co.uk')->first();
+        $cc = User::where('email', 'hello@gocha.co.uk')->first();
+
+        Mail::to($to)->cc($cc)->send(new ScheduledExpenseNotification($event->expenses));
     }
 }
