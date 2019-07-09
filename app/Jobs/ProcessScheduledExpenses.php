@@ -37,7 +37,10 @@ class ProcessScheduledExpenses implements ShouldQueue
             $item->scheduled();
         });
         event(new ScheduledExpensesProcessed($current));
-        Mail::to(env('SCHEDULED_NOTIFICATION_RECIPIENT'))->cc(env('SCHEDULED_NOTIFICATION_CC'))->send(new ScheduledExpenseNotification($current));
+        $to = User::where('email', 'michael@416studios.co.uk')->first();
+        $cc = User::where('email', 'hello@gocha.co.uk')->first();
+
+        Mail::to($to)->cc($cc)->send($current);
         return $current;
     }
 }
