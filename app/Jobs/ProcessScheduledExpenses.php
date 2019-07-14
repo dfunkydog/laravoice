@@ -8,8 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\ScheduledExpenseNotification;
+use App\Events\ScheduledExpensesProcessed;
 
 class ProcessScheduledExpenses implements ShouldQueue
 {
@@ -36,11 +35,8 @@ class ProcessScheduledExpenses implements ShouldQueue
         $current->pluck('expense')->each(function ($item) {
             $item->scheduled();
         });
-        event(new ScheduledExpensesProcessed($current));
-        $to = User::where('email', 'michael@416studios.co.uk')->first();
-        $cc = User::where('email', 'hello@gocha.co.uk')->first();
+        event(new ScheduledExpensesProcessed($current->pluck('expense')));
 
-        Mail::to($to)->cc($cc)->send($current);
         return $current;
     }
 }
