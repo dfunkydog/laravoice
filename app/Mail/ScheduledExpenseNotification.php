@@ -20,7 +20,7 @@ class ScheduledExpenseNotification extends Mailable
      */
     public function __construct($expenses)
     {
-      $this->expenses = $expenses;
+        $this->expenses = $expenses;
     }
 
     /**
