@@ -32,6 +32,9 @@ class ProcessScheduledExpenses implements ShouldQueue
     public function handle()
     {
         $current = ScheduledExpense::current()->with('expense')->get();
+        if ($current->count() === 0) {
+            return $current;
+        }
         $current->pluck('expense')->each(function ($item) {
             $item->scheduled();
         });
