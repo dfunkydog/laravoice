@@ -7,8 +7,10 @@ use App\Models\ExpenseType;
 use App\Models\Vendor;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Http\Request;
 use App\Services\ExpenseServices;
+use Utilities\Inspire;
 
 class ExpenseController extends Controller
 {
@@ -26,7 +28,7 @@ class ExpenseController extends Controller
 
             return $next($request);
         });
-        $this->expenses= $expenses;
+        $this->expenses = $expenses;
     }
 
     /**
@@ -36,7 +38,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses =$this->expenses->getBetween($this->period);
+        $expenses = $this->expenses->getBetween($this->period);
 
         return view('expense', compact('expenses'));
     }
@@ -46,11 +48,15 @@ class ExpenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $typeFields = ExpenseType::all();
         $vendors = Vendor::all();
         $descriptions = $this->expenses->getDescriptions();
+        //Set previous page as url.intended. this will help us redirect
+        // After storing new Expense
+        $request->session()->put('url.toExpense', URL::previous());
+        $request->session()->flash('status', Inspire::quote());
 
         return view('expense.create', compact('typeFields', 'vendors', 'descriptions'));
     }
@@ -81,7 +87,7 @@ class ExpenseController extends Controller
 
         Expense::create($expense);
 
-        return redirect()->route('dashboard');
+        return redirect(session()->pull('url.toExpense'))->with('status', Inspire::quote());
     }
 
     /**
