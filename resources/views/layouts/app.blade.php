@@ -22,21 +22,23 @@
 
 <body>
     <div id="app">
-    @include('layouts.header') @yield('content')
-        <set-period :display="showPeriodSelect" :start="'{!! session('period') ? session( 'period' )[0]->format('Y-m-d') : ''!!}'"
+    @include('layouts.header') 
+    @yield('content')
+    <notifier></notifier>
+            
+    @if ($errors->any())
+        <flash type="error" content="That didn't work, try again"></flash>
+    @endif
+    
+    @if (session('status'))
+        <flash  content="{{e(session('status'))}}"></flash>
+    @endif
+    
+    <set-period :display="showPeriodSelect" :start="'{!! session('period') ? session( 'period' )[0]->format('Y-m-d') : ''!!}'"
             :end="'{!! session('period') ? session( 'period' )[1]->format('Y-m-d') : '' !!}'" @close=close token={{ csrf_token()
             }}></set-period>
+            
     </div>
-    <div>
-        @if(Session::has('success_message')) {{ Session::get('success_message') }} @endif @if(Session::has('error_message')) {{ Session::get('error_message')
-        }} @endif @if(Session::has('message')) {{ Session::get('message') }} @endif
-    </div>
-    @if (session('status'))
-    <div class="alert alert-success" role="alert">
-        {{ session('status') }}
-    </div>
-    <vc-flash></vc-flash>
-    @endif
 
     <script src="{{ mix( 'js/app.js') }} "></script>
 </body>

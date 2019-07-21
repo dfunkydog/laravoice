@@ -16,19 +16,29 @@
     --darker: #1b1b1e;
     --opaque: hsla(0, 0%, 31%, 0.5);
     --error: hsl(0, 76.9%, 72.9%);
+    --background-error: hsl(0,69.6%, 91%);
 
     --body-bg: var(--background);
     --font-color: var(--dark);
     --link-color: var(--dark);
     --shadow: hsl(170, 80%, 85%);
     --highlight: red;
+
 }
 /**
 * MIXINS
 **/
 
-@mixin rounded() {
-    border-radius: 0.25rem;
+$pad: 16px;
+
+$radii: ("normal":1, "big": 2, "large": 4, "huge":8);
+@mixin rounded($size: normal) {
+    @if(map-get($radii, $size) == null){
+        @warn "#{$size} is not a valid argument";
+        border-radius: 0.25rem;
+    } @else {
+        border-radius: #{map-get($radii, $size) * .25}rem;
+    } 
 }
 
 @mixin glow() {
