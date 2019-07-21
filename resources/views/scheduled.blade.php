@@ -24,5 +24,8 @@
         </li>
         @endforeach
     </ul>
+    @if (Route::currentRouteName()=== 'scheduled.index')
+        <p><a href="{{route('listScheduled')}}">Show all</a></p>
+    @endif
 </section>
 @endsection

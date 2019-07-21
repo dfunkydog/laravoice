@@ -2,7 +2,8 @@
 <div class="content">
 <p><em>Hallo...</em></p>
 
-<p>A reminder that the following {{ Illuminate\Support\Str::plural('expense', count($expenses)) }} {{ Illuminate\Support\Str::plural('is', count($expenses)) }} scheduled for payment today. </p>
+<p>A reminder that the following {{ Illuminate\Support\Str::plural('expense', count($expenses)) }} {{ Illuminate\Support\Str::plural('is', count($expenses)) }} <a href="{{route('scheduled.index')}}">
+scheduled for payment today</a>. </p>
 
 <table>
     <tr>

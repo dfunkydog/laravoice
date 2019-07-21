@@ -112,6 +112,7 @@ class ExpenseController extends Controller
     {
         $typeFields = ExpenseType::all();
         $descriptions = DB::table('expenses')->select('description')->distinct()->get();
+        session()->put('url.toExpense', URL::previous());
 
         return view('expense.edit', compact('typeFields', 'expense', 'descriptions'));
     }
@@ -133,7 +134,7 @@ class ExpenseController extends Controller
         $expenseValues['vendor_id'] = $vendorId;
         $expense->update($expenseValues);
 
-        return view('expense.show', compact('expense'));
+        return redirect(session()->pull('url.toExpense'))->with('status', Inspire::quote());
     }
 
     /**
