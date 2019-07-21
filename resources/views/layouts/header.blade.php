@@ -8,11 +8,14 @@
                 Dashboard
             @endauth
         </a>
+        @guest
+        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> 
+        @else
         <a href="#" class="date_range" @click="showPeriodSelect = true">Period</a>
         <a href="{{route('vendor.index')}}">Vendor</a>
+        <a href="{{route('scheduled.index')}}">Scheduled</a>
+
         <!-- Authentication Links -->
-        @guest
-        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> @else
         <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
