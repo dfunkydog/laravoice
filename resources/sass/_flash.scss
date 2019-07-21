@@ -1,0 +1,24 @@
+.notifier {
+    @include rounded(large);
+    position: fixed;
+    top: $pad;
+    right: $pad;
+    background: var(--accent);
+    padding: $pad;
+    max-width: 500px;
+    color: var(--dark); 
+   &.error{
+       background: var(--background-error);
+       color: var(--highlight)
+   }
+   @media screen and (max-width: 800px){
+       right: 10%;
+       max-width: 80%;
+   }
+}
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }

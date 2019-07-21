@@ -5,18 +5,22 @@
  */
 
 require("./bootstrap");
-import Modal from "./components/Modal";
-import SetPeriod from "./components/SetPeriod";
 window.Vue = require("vue");
-window.Event = new Vue();
+window.Bus = new Vue();
+
+import Modal from "./components/Modal";
+import Notifier from "./components/Notifier"
+import Flash from "./components/Flash";
+import SetPeriod from "./components/SetPeriod";
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+Vue.component("flash", Flash);
 Vue.component("modal", Modal);
+Vue.component("notifier", Notifier);
 Vue.component("set-period", SetPeriod);
 
 const app = new Vue({

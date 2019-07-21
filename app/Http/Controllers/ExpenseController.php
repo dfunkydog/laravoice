@@ -56,7 +56,6 @@ class ExpenseController extends Controller
         //Set previous page as url.intended. this will help us redirect
         // After storing new Expense
         $request->session()->put('url.toExpense', URL::previous());
-        $request->session()->flash('status', Inspire::quote());
 
         return view('expense.create', compact('typeFields', 'vendors', 'descriptions'));
     }
