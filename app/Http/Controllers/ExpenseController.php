@@ -87,7 +87,7 @@ class ExpenseController extends Controller
             ['user_id' => auth()->user()->id, 'vendor_id' => $vendorId]
         );
         $expense_id = Expense::create($expense)->id;
-        if ($expense['is_scheduled']) {
+        if (isset($expense['is_scheduled'])) {
             (new ScheduledExpense)->create([
                 'parent_expense_id' => $expense_id,
                 'end_date' => $expense['end_date'] ?? null,
