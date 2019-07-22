@@ -11,6 +11,8 @@ class ScheduledExpense extends Model
     public $timestamps = false;
     protected $fillable = ['scheduled_day', 'parent_expense_id', 'end_date', 'schedule_pattern_id'];
 
+
+
     public function expense()
     {
         return $this->hasOne(Expense::class, 'id', 'parent_expense_id');
@@ -38,4 +40,6 @@ class ScheduledExpense extends Model
     {
         return $this->with(['expense', 'pattern'])->orderby('scheduled_day')->get();
     }
+
+    
 }

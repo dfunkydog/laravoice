@@ -28,6 +28,21 @@
             <input list="vendors" id="vendorName" name="vendorName" type="text" value={{ old( 'vendorName') }}> {!! $errors->has('vendorName')
             ? "<span class='is-error-message'>{$errors->first('vendorName')}</span>" : '' !!}
         </div>
+        <div class="form-group {{ $errors->has('is_scheduled') ? 'is-error' : ''}}">
+            <input id="is_scheduled" name="is_scheduled" value="1" type="checkbox" {{ old( 'is_scheduled') ? 'checked' : ''}}> {!! $errors->has('is_scheduled')
+            ? "<span class='is-error-message'>{$errors->first('is_scheduled')}</span>" : '' !!}
+            <label for="is_scheduled">Make this a scheduled expense</label>
+        </div>
+        @if(count($scheduled_pattern) > 0)
+        <div class="form-group">
+            <select name="pattern" id="pattern">
+                @foreach ($scheduled_pattern as $pattern)
+                    
+            <option value="{{ $pattern->id }}">{{ $pattern->pattern }}</option>
+                @endforeach
+            </select>
+        </div>
+        @endif
         <datalist id="vendors">
             @foreach ($vendors as $vendor)
         <option value="{{$vendor->name}}"/>

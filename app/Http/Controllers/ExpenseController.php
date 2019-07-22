@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
 use App\Services\ExpenseServices;
 use Utilities\Inspire;
+use App\Models\SchedulePattern;
+use App\Models\ScheduledExpense;
 
 class ExpenseController extends Controller
 {
@@ -51,13 +53,14 @@ class ExpenseController extends Controller
     public function create(Request $request)
     {
         $typeFields = ExpenseType::all();
+        $scheduled_pattern = SchedulePattern::all();
         $vendors = Vendor::all();
         $descriptions = $this->expenses->getDescriptions();
         //Set previous page as url.intended. this will help us redirect
         // After storing new Expense
         $request->session()->put('url.toExpense', URL::previous());
 
-        return view('expense.create', compact('typeFields', 'vendors', 'descriptions'));
+        return view('expense.create', compact('typeFields', 'vendors', 'descriptions', 'scheduled_pattern'));
     }
 
     /**
@@ -83,8 +86,15 @@ class ExpenseController extends Controller
             request()->all(),
             ['user_id' => auth()->user()->id, 'vendor_id' => $vendorId]
         );
-
-        Expense::create($expense);
+        $expense_id = Expense::create($expense)->id;
+        if ($expense['is_scheduled']) {
+            (new ScheduledExpense)->create([
+                'parent_expense_id' => $expense_id,
+                'end_date' => $expense['end_date'] ?? null,
+                'schedule_pattern_id' => $expense['pattern'],
+                'scheduled_day' => $this->defaultDay((int)$expense['pattern']),
+            ]);
+        }
 
         return redirect(session()->pull('url.toExpense'))->with('status', Inspire::quote());
     }
@@ -148,5 +158,15 @@ class ExpenseController extends Controller
         $expense->delete();
 
         return redirect()->route('expense.index');
+    }
+
+    public static function defaultDay(int $pattern)
+    {
+        $pattern_name = SchedulePattern::find($pattern);
+        if ($pattern_name->pattern == 'Monthly') {
+            return now()->day;
+        } else {
+            return now()->dayOfWeekIso;
+        }
     }
 }
