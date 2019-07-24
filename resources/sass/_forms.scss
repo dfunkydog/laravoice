@@ -86,3 +86,10 @@ input[type="checkbox"] {
     border: none;
     cursor: pointer;
 }
+
+.js-make_scheduled_options{
+    display:none;
+    &.active{
+        display: block;
+    }
+}
