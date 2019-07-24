@@ -34,7 +34,7 @@
             <label for="is_scheduled">Make this a scheduled expense</label>
         </div>
         @if(count($scheduled_pattern) > 0)
-        <div class="form-group">
+        <div class="form-group js-make_scheduled_options">
             <select name="pattern" id="pattern">
                 @foreach ($scheduled_pattern as $pattern)
                     

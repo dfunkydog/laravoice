@@ -8,6 +8,7 @@ require("./bootstrap");
 window.Vue = require("vue");
 window.Bus = new Vue();
 
+import toggleMakeScheduled from "./interactions/toggleMakeScheduled";
 import Modal from "./components/Modal";
 import Notifier from "./components/Notifier"
 import Flash from "./components/Flash";
@@ -32,5 +33,11 @@ const app = new Vue({
         close: function() {
             this.showPeriodSelect = false;
         }
+    }
+});
+
+document.addEventListener('readystatechange', function(){
+    if(document.readyState === 'interactive'){
+        toggleMakeScheduled();
     }
 });
