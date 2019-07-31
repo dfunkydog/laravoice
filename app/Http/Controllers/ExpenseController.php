@@ -92,7 +92,7 @@ class ExpenseController extends Controller
                 'parent_expense_id' => $expense_id,
                 'end_date' => $expense['end_date'] ?? null,
                 'schedule_pattern_id' => $expense['pattern'],
-                'scheduled_day' => $this->defaultDay((int)$expense['pattern']),
+                'scheduled_day' => $this->defaultDay((int) $expense['pattern']),
             ]);
         }
 

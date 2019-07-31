@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Expense;
 use Illuminate\Http\Request;
-use Utilities\Inspire;
 
 class DashboardController extends Controller
 {
@@ -29,6 +28,7 @@ class DashboardController extends Controller
             ->orderBy('name')
             ->get();
         $totalExpenses = number_format($categories->sum('total'), 2);
+
         return view('dashboard', compact('categories', 'totalExpenses'));
     }
 }
