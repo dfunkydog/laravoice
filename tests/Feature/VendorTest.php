@@ -14,7 +14,7 @@ class Vendor extends TestCase
 
     protected $user;
 
-    public function setup()
+    public function setup() :void
     {
         parent::setUp();
         $this->user = factory(User::class)->create();

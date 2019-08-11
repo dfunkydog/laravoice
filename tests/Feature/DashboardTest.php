@@ -12,7 +12,7 @@ class DashboardTest extends TestCase
     use WithFaker, RefreshDatabase;
     protected $user;
 
-    public function setup()
+    public function setup() :void
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
