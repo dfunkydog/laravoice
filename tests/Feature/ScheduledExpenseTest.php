@@ -15,7 +15,7 @@ class ScheduledExpense extends TestCase
     use RefreshDatabase, WithFaker, DatabaseMigrations;
     protected $user;
 
-    public function setup()
+    public function setup() :void
     {
         parent::setUp();
         $this->user = factory(User::class)->create();
@@ -103,10 +103,10 @@ class ScheduledExpense extends TestCase
     */
     public function current_scope_returns_monthly_and_weekly_scheduled_expenses_due_today()
     {
-        factory(Scheduled::class, 1)->create(['scheduled_day' => (new Carbon)->day, 'schedule_pattern_id'=>1]);
-        factory(Scheduled::class, 2)->create(['scheduled_day' => (new Carbon)->dayOfWeekIso,'schedule_pattern_id'=>2]);
-        factory(Scheduled::class, 4)->create(['scheduled_day' => (new Carbon)->subDay(1)->day, 'schedule_pattern_id'=>1]);
-        factory(Scheduled::class, 8)->create(['scheduled_day' => (new Carbon)->subDay(1)->dayOfWeekIso, 'schedule_pattern_id'=>2]);
+        factory(Scheduled::class, 1)->create(['scheduled_day' => (new Carbon)->day, 'schedule_pattern_id' => 1]);
+        factory(Scheduled::class, 2)->create(['scheduled_day' => (new Carbon)->dayOfWeekIso, 'schedule_pattern_id' => 2]);
+        factory(Scheduled::class, 4)->create(['scheduled_day' => (new Carbon)->subDay(1)->day, 'schedule_pattern_id' => 1]);
+        factory(Scheduled::class, 8)->create(['scheduled_day' => (new Carbon)->subDay(1)->dayOfWeekIso, 'schedule_pattern_id' => 2]);
         $expenses = Scheduled::current()->get()->count();
 
         $this->assertEquals(3, $expenses);

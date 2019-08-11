@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Services;
 
 use App\Models\Expense;
+use Illuminate\Support\Facades\DB;
 
 class ExpenseServices
 {
@@ -14,6 +16,6 @@ class ExpenseServices
 
     public function getDescriptions()
     {
-        return Expense::distinct('description')->get();
+        return DB::table('expenses')->selectRaw('DISTINCT description')->get();
     }
 }
