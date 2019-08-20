@@ -65,4 +65,17 @@ class Expense extends Model
 
         return $cloned;
     }
+
+    protected static function validate()
+    {
+        $eod = (new Carbon())->endOfDay();
+
+        return request()->validate([
+            'amount' => 'required',
+            'description' => 'required | min:3',
+            'type_id' => 'required | integer',
+            'paid_on' => 'before_or_equal:' . $eod,
+            'vendorName' => 'required',
+        ]);
+    }
 }

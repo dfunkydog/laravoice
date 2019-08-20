@@ -33,15 +33,4 @@ class Vendor extends Model
 
         return $expenses;
     }
-
-    public function syncVendor(String $name)
-    {
-        $vendorExists = $this->where('name', $name)->first();
-        if ($vendorExists) {
-            return $vendorExists->id;
-        }
-        $vendor = $this->create(['name' => $name]);
-
-        return $vendor->id;
-    }
 }

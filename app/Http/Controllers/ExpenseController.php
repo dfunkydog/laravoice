@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Expense;
 use App\Models\ExpenseType;
 use App\Models\Vendor;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Http\Request;
@@ -71,17 +70,8 @@ class ExpenseController extends Controller
      */
     public function store()
     {
-        $vendor = new Vendor;
-        $eod = (new Carbon())->endOfDay();
-
-        $valid = request()->validate([
-            'amount' => 'required',
-            'description' => 'required | min:3',
-            'type_id' => 'required | integer',
-            'paid_on' => 'before_or_equal:' . $eod,
-        ]);
-
-        $vendorId = $vendor->syncVendor(request()->get('vendorName'));
+        Expense::validate();
+        $vendorId = Vendor::firstOrCreate(['name' => request()->get('vendorName')])->id;
         $expense = array_merge(
             request()->all(),
             ['user_id' => auth()->user()->id, 'vendor_id' => $vendorId]
@@ -96,7 +86,7 @@ class ExpenseController extends Controller
             ]);
         }
 
-        return redirect(session()->pull('url.toExpense'))->with('status', Inspire::quote());
+        return redirect(session()->pull('url.toExpense') ?? '/dashboard')->with('status', Inspire::quote());
     }
 
     /**
@@ -136,12 +126,9 @@ class ExpenseController extends Controller
      */
     public function update(Expense $expense)
     {
+        Expense::validate();
         $expenseValues = request()->all();
-        if ($expenseValues['vendor']) {
-            $vendor = new Vendor;
-            $vendorId = $vendor->syncVendor($expenseValues['vendor']);
-        }
-        $expenseValues['vendor_id'] = $vendorId;
+        $expenseValues['vendor_id'] = Vendor::firstOrCreate(['name' => $expenseValues['vendor']])->id;
         $expense->update($expenseValues);
 
         return redirect(session()->pull('url.toExpense'))->with('status', Inspire::quote());
