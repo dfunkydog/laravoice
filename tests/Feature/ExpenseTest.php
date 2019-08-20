@@ -100,10 +100,10 @@ class Expense extends TestCase
     /**
     * @test
     */
-    public function an_expense_may_not_have_a_vendorName()
+    public function an_expense_must_have_a_vendorName()
     {
         $expense = factory('App\Models\Expense')->raw(['vendorName' => '']);
-        $this->actingAs($this->user)->post('expense', $expense)->assertSessionHasNoErrors('vendorName');
+        $this->actingAs($this->user)->post('expense', $expense)->assertSessionHasErrors('vendorName');
     }
 
     /**
