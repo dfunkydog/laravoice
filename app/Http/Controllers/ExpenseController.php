@@ -128,7 +128,7 @@ class ExpenseController extends Controller
     {
         Expense::validate();
         $expenseValues = request()->all();
-        $expenseValues['vendor_id'] = Vendor::firstOrCreate(['name' => $expenseValues['vendor']])->id;
+        $expenseValues['vendor_id'] = Vendor::firstOrCreate(['name' => $expenseValues['vendorName']])->id;
         $expense->update($expenseValues);
 
         return redirect(session()->pull('url.toExpense'))->with('status', Inspire::quote());
