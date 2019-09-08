@@ -12,10 +12,15 @@
                 @endforeach
             </select>
         </div>
-        <div class="form-group"><label>Date</label><input type="date" name="paid_on" value={{old( 'paid_on', date( 'Y-m-d' ))}}></div>
+        <div class="form-group {{ $errors->has('paid_on') ? 'is-error' : '' }}">
+            <label>Date</label><input type="date" name="paid_on" value={{old( 'paid_on', date( 'Y-m-d' ))}}>
+            {!! $errors->has('paid_on')
+            ? "<span class='is-error-message'>{$errors->first('paid_on')}</span>" : '' !!}
+        </div>
         <div class="form-group {{ $errors->has('description') ? 'is-error' : '' }}">
             <label for="description">Description</label>
-            <input list="descriptions" name="description" type="text" value={{old( 'description')}}> {!! $errors->has('description')
+            <input list="descriptions" name="description" type="text" value={{old( 'description')}}> 
+            {!! $errors->has('description')
             ? "<span class='is-error-message'>{$errors->first('description')}</span>" : '' !!}
         </div>
         <div class="form-group {{ $errors->has('amount') ? 'is-error': ''}}">
