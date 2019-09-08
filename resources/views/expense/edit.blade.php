@@ -13,7 +13,10 @@
             @endforeach
         </select>
         </div>
-        <div class="form-group {{ $errors->has('paid_on') ? 'is-error' : '' }}"><label>Date</label><input type="date" name="paid_on" value={{$expense->paid_on}}></div>
+        <div class="form-group {{ $errors->has('paid_on') ? 'is-error' : '' }}"><label>Date</label><input type="date" name="paid_on" value={{$expense->paid_on}}>
+            {!! $errors->has('paid_on')
+            ? "<span class='is-error-message'>{$errors->first('paid_on')}</span>" : '' !!}
+        </div>
         <div class="form-group {{ $errors->has('description') ? 'is-error' : '' }}"><label for="description">Description</label><input name="description" type="text" value={{$expense->description}}>{!! $errors->has('description')
             ? "<span class='is-error-message'>{$errors->first('description')}</span>" : '' !!}</div>
         <div class="form-group {{ $errors->has('amount') ? 'is-error' : '' }}"><label for="amount">Amount</label><input name="amount" type="number" step="any" value={{$expense->amount}}>{!! $errors->has('amount')
