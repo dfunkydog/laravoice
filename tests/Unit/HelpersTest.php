@@ -6,7 +6,7 @@ use Tests\TestCase;
 
 class helpers extends TestCase
 {
-/**
+    /**
      * Test to ensure the proper ordinal indicator is applied to values passed
      * to the str_ordinal helper function.
      * @test
