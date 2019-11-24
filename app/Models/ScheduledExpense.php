@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Models\Expense;
 
 class ScheduledExpense extends Model
 {
@@ -62,6 +63,21 @@ class ScheduledExpense extends Model
             ->whereDate('end_date', '>=', new Carbon())
             ->orWhere('end_date', null)
             ->orderby('scheduled_day')->get();
+    }
+
+    public function processsScheduled()
+    {
+        $expense = new Expense();
+        $expense->description = $this->description;
+        $expense->amount = $this->amount;
+        $expense->user_id = $this->user_id;
+        $expense->type_id = $this->type_id;
+        $expense->vendor_id = $this->vendor_id;
+        $expense->paid_on = Carbon::now();
+        $expense->is_scheduled = true;
+        $expense->save();
+
+        return $expense;
     }
 
     
