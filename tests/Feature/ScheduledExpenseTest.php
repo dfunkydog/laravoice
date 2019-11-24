@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use App\Models\Vendor;
 
 class ScheduledExpense extends TestCase
 {
@@ -28,6 +29,8 @@ class ScheduledExpense extends TestCase
      */
     public function scheduled_expense_index_returns_200()
     {
+        factory(Scheduled::class, 1)->create(['scheduled_day' => (new Carbon)->day, 'schedule_pattern_id' => 1]);
+        factory(Scheduled::class, 8)->create(['scheduled_day' => (new Carbon)->subDay(1)->dayOfWeekIso, 'schedule_pattern_id' => 2]);
         $this->actingAs($this->user);
         $this->get('/scheduled')->assertStatus(200);
     }
@@ -39,6 +42,7 @@ class ScheduledExpense extends TestCase
      */
     public function scheduled_expense_list_returns_200()
     {
+        factory(Scheduled::class, 8)->create(['scheduled_day' => (new Carbon)->subDay(1)->dayOfWeekIso, 'schedule_pattern_id' => 2]);
         $this->actingAs($this->user);
         $this->get('/scheduled/list')->assertStatus(200);
     }
@@ -49,8 +53,11 @@ class ScheduledExpense extends TestCase
     public function a_user_can_create_scheduled_expense()
     {
         $this->withoutExceptionHandling();
-        $scheduled = factory(Scheduled::class)->raw();
-        $this->actingAs($this->user)->post('scheduled', $scheduled);
+        $scheduled = factory(Scheduled::class)->raw(['user_id' => $this->user->id]);
+        $vendor = Vendor::find($scheduled['vendor_id']);
+        $scheduled_raw = array_merge($scheduled, ['vendorName'=> $vendor->name]);
+        
+        $this->actingAs($this->user)->post('scheduled', $scheduled_raw);
         $scheduled['end_date'] = $scheduled['end_date'] ? $scheduled['end_date']->format('Y-m-d') : null;
         $this->assertDatabaseHas('scheduled_expenses', $scheduled);
     }
@@ -63,17 +70,6 @@ class ScheduledExpense extends TestCase
         $scheduled = factory(Scheduled::class)->raw();
         $this->post('scheduled', $scheduled)
                 ->assertRedirect('login');
-    }
-
-    /**
-    * @test
-    */
-    public function scheduled_expense_must_have_a_parent_expense()
-    {
-        $scheduled = factory(Scheduled::class)->raw(['parent_expense_id' => null]);
-        $this->actingAs($this->user)
-                ->post('scheduled', $scheduled)
-                ->assertSessionHasErrors('parent_expense_id');
     }
 
     /**

@@ -16,9 +16,9 @@
                     {{jddayofweek($item->scheduled_day-1,2)}}</strong></span>
 
                     @endif
-                <div class="catlist__count"><strong>{{$item->expense->vendor->name}}</strong>: {{$item->expense->description}} items</div>
+                <div class="catlist__count"><strong>{{$item->vendor->name}}</strong>: {{$item->description}} items</div>
                 <div class="catlist__amount pill">
-                    <sup>£</sup> {{$item->expense->amount}}
+                    <sup>£</sup> {{$item->amount}}
                 </div>
             </a>
         </li>

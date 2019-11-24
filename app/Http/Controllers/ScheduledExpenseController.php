@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ScheduledExpense;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
 class ScheduledExpenseController extends Controller
@@ -50,11 +51,20 @@ class ScheduledExpenseController extends Controller
     public function store(Request $request)
     {
         $valid = $request->validate([
-            'parent_expense_id' => 'integer',
             'scheduled_day' => 'integer|min:1|max:31',
             'schedule_pattern_id' => 'integer',
+            'amount' => 'required',
+            'description' => 'required | min:3',
+            'type_id' => 'required | integer',
+            'vendorName' => 'required',
         ]);
-        $scheduled = ScheduledExpense::create($request->all());
+
+        $vendorId = Vendor::firstOrCreate(['name' => request()->get('vendorName')])->id;
+        $scheduledExpense = array_merge(
+            request()->all(),
+            ['user_id' => auth()->user()->id, 'vendor_id' => $vendorId]
+        );
+        $scheduled = (new ScheduledExpense)->create($scheduledExpense);
 
         return redirect()->route('dashboard');
     }

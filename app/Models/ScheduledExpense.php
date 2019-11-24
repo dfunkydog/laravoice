@@ -9,13 +9,33 @@ use Illuminate\Support\Facades\DB;
 class ScheduledExpense extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['scheduled_day', 'parent_expense_id', 'end_date', 'schedule_pattern_id'];
+    protected $fillable = [
+        'scheduled_day', 'schedule_pattern_id', 'user_id', 'end_date',
+        'description', 'amount', 'vendor_id', 'type_id', 
+        ];
 
-
-
-    public function expense()
+    /**
+     * Get the user associated with this expense
+     */
+    public function user()
     {
-        return $this->hasOne(Expense::class, 'id', 'parent_expense_id');
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get type associated with this expense
+     */
+    public function type()
+    {
+        return $this->hasOne('App\Models\ExpenseType', 'id', 'type_id');
+    }
+
+    /**
+     * Get the vendor associated with this expense
+     */
+    public function vendor()
+    {
+        return $this->hasOne('App\Models\Vendor', 'id', 'vendor_id');
     }
 
     public function pattern()
@@ -38,7 +58,7 @@ class ScheduledExpense extends Model
 
     public function list()
     {
-        return $this->with(['expense', 'pattern'])->orderby('scheduled_day')->get();
+        return $this->with(['vendor', 'type', 'pattern'])->orderby('scheduled_day')->get();
     }
 
     
