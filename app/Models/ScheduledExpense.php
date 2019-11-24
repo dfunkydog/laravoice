@@ -47,8 +47,8 @@ class ScheduledExpense extends Model
     {
         $today = new Carbon();
 
-        return $query->whereRaw('(scheduled_day = DAYOFMONTH(UTC_DATE) AND schedule_pattern_id = 1)
-                OR (scheduled_day = WEEKDAY(UTC_DATE)+1 AND schedule_pattern_id = 2)')
+        return $query->whereRaw('((scheduled_day = DAYOFMONTH(UTC_DATE) AND schedule_pattern_id = 1)
+                OR (scheduled_day = WEEKDAY(UTC_DATE)+1 AND schedule_pattern_id = 2))')
             ->where(function ($query) use ($today) {
                 $query
                 ->whereDate('end_date', '>=', $today)
@@ -58,7 +58,10 @@ class ScheduledExpense extends Model
 
     public function list()
     {
-        return $this->with(['vendor', 'type', 'pattern'])->orderby('scheduled_day')->get();
+        return $this->with(['vendor', 'type', 'pattern'])
+            ->whereDate('end_date', '>=', new Carbon())
+            ->orWhere('end_date', null)
+            ->orderby('scheduled_day')->get();
     }
 
     
