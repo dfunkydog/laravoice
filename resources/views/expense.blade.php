@@ -13,7 +13,7 @@
         @foreach ($expenses as $expense)
         <tr>
             <td>
-                <a href="{{action('ExpenseController@show', ['id' => $expense->id])}}">{{strtoupper($expense->type->name)}}</a></td>
+                <a href="{{action('ExpenseController@show', ['expense' => $expense->id])}}">{{strtoupper($expense->type->name)}}</a></td>
             <td class="currency">
                 £{{$expense->amount}}
             </td>

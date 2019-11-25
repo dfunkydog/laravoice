@@ -5,7 +5,7 @@
     <ul class="catlist">
         @foreach ($expenses as $expense)
         <li>
-            <a class="catlist__item" href="{{action('ExpenseController@show', ['id' => $expense->id])}}" style="background-size: {{ $expense->amount *100 /$expenses->max('amount')  }}% {{config( 'view.depth') }} ">
+            <a class="catlist__item" href="{{action('ExpenseController@show', ['expense' => $expense->id])}}" style="background-size: {{ $expense->amount *100 /$expenses->max('amount')  }}% {{config( 'view.depth') }} ">
                 <strong>{{strtoupper($expense->vendor->name)}}</strong>
                 <div class="catlist__count ">
                     {{$expense->description}}

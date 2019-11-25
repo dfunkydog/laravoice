@@ -4,16 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
-use App\Models\Expense;
 
 class ScheduledExpense extends Model
 {
     public $timestamps = false;
     protected $fillable = [
         'scheduled_day', 'schedule_pattern_id', 'user_id', 'end_date',
-        'description', 'amount', 'vendor_id', 'type_id', 
-        ];
+        'description', 'amount', 'vendor_id', 'type_id',
+    ];
 
     /**
      * Get the user associated with this expense
@@ -65,7 +63,7 @@ class ScheduledExpense extends Model
             ->orderby('scheduled_day')->get();
     }
 
-    public function processsScheduled()
+    public function processScheduled()
     {
         $expense = new Expense();
         $expense->description = $this->description;
@@ -79,6 +77,4 @@ class ScheduledExpense extends Model
 
         return $expense;
     }
-
-    
 }
