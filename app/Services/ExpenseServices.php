@@ -14,7 +14,7 @@ class ExpenseServices
             ->sortByDesc('paid_on');
     }
 
-    public function getDescriptions()
+    public static function getDescriptions()
     {
         return DB::table('expenses')->selectRaw('DISTINCT description')->get();
     }

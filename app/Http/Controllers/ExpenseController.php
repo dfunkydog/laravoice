@@ -54,7 +54,7 @@ class ExpenseController extends Controller
         $typeFields = ExpenseType::all();
         $scheduled_pattern = SchedulePattern::all();
         $vendors = Vendor::all();
-        $descriptions = $this->expenses->getDescriptions();
+        $descriptions = $this->expenses::getDescriptions();
         //Set previous page as url.intended. this will help us redirect
         // After storing new Expense
         $request->session()->put('url.toExpense', URL::previous());
