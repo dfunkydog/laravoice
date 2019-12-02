@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\Models\Expense;
 use App\Services\ExpenseServices;
 
 class ExpenseServicesTest extends TestCase
@@ -17,7 +16,7 @@ class ExpenseServicesTest extends TestCase
      */
     public function expense_services_descriptions_returns_iterable()
     {
-        $descriptions = (new ExpenseServices(new Expense()))->getDescriptions();
+        $descriptions = ExpenseServices::getDescriptions();
         $this->assertIsIterable($descriptions);
     }
 }

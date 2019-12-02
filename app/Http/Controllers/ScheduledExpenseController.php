@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExpenseType;
 use App\Models\ScheduledExpense;
+use App\Models\SchedulePattern;
 use App\Models\Vendor;
+use App\Services\ExpenseServices;
 use Illuminate\Http\Request;
+use Utilities\Inspire;
 
 class ScheduledExpenseController extends Controller
 {
@@ -37,10 +41,15 @@ class ScheduledExpenseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        //Set previous page as url.intended. this will help us redirect
+        // After storing new Expense
+        $request->session()->put('url.toExpense', URL::previous());
+
+        return view('scheduled.create', self::formVariables());
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -57,6 +66,7 @@ class ScheduledExpenseController extends Controller
             'description' => 'required | min:3',
             'type_id' => 'required | integer',
             'vendorName' => 'required',
+            'end_date' => 'nullable|date'
         ]);
 
         $vendorId = Vendor::firstOrCreate(['name' => request()->get('vendorName')])->id;
@@ -66,7 +76,7 @@ class ScheduledExpenseController extends Controller
         );
         $scheduled = (new ScheduledExpense)->create($scheduledExpense);
 
-        return redirect()->route('dashboard');
+        return redirect(session()->pull('url.toExpense') ?? '/scheduled/list')->with('status', Inspire::quote());
     }
 
     /**
@@ -86,9 +96,12 @@ class ScheduledExpenseController extends Controller
      * @param  \App\ScheduledExpense  $scheduledExpense
      * @return \Illuminate\Http\Response
      */
-    public function edit(ScheduledExpense $scheduledExpense)
+    public function edit(ScheduledExpense $scheduled)
     {
-        //
+        return view(
+            'scheduled.edit',
+            array_merge( self::formVariables(), ['scheduled' => $scheduled])
+        );
     }
 
     /**
@@ -98,9 +111,11 @@ class ScheduledExpenseController extends Controller
      * @param  \App\ScheduledExpense  $scheduledExpense
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ScheduledExpense $scheduledExpense)
+    public function update(Request $request, ScheduledExpense $scheduled)
     {
-        //
+        $scheduled = $scheduled->update($request->all());
+
+        return redirect(session()->pull('url.toExpense') ?? '/scheduled/list')->with('status', Inspire::quote());
     }
 
     /**
@@ -112,5 +127,20 @@ class ScheduledExpenseController extends Controller
     public function destroy(ScheduledExpense $scheduledExpense)
     {
         //
+    }
+
+    /**
+     * Variable needed to populate edit/create forms
+     *
+     * @return array
+     */
+    protected static function formVariables()
+    {
+        $typeFields = ExpenseType::all();
+        $patterns = SchedulePattern::all();
+        $vendors = Vendor::all();
+        $descriptions = ExpenseServices::getDescriptions();
+
+        return compact(['descriptions', 'typeFields', 'patterns', 'vendors']);
     }
 }

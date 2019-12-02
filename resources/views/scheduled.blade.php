@@ -5,7 +5,7 @@
     <ul class="catlist">
         @foreach ($items as $item)
         <li>
-            <a class="catlist__item">
+            <a href="{{ action('ScheduledExpenseController@edit', ['scheduled'=>$item->id]) }}" class="catlist__item">
                 <span>{{$item->pattern->pattern}} on:<strong>
                     @if ($item->pattern->id==1)
                     {{
