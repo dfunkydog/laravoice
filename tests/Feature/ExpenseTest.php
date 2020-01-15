@@ -53,6 +53,15 @@ class Expense extends TestCase
     }
 
     /**
+     *  @test
+     */
+    public function a_user_can_view_an_expense()
+    {
+        $expense = factory('App\Models\Expense')->create();
+        $this->actingAs($this->user)->get('/expense/' . $expense->id)->assertStatus(200);
+    }
+
+    /**
     * @test
     */
     public function an_expense_must_have_a_type_id()

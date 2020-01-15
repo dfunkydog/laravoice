@@ -1,4 +1,4 @@
-@extends('layouts.app') 
+@extends('layouts.app')
 @section('content')
 <section class="section">
     <h1><a href={{ action( 'ExpenseController@index') }}>All expenses</a></h1>
@@ -6,11 +6,11 @@
     <div class="expense-details ">
         <a class="btn " href="{{action( 'ExpenseController@edit', [ 'expense'=> $expense->id])}}">EDIT</a>
         <h3>
-            <a href="{{ route('category.show', ['id'=> $expense->type->id]) }}">{{$expense->type->name}}</a> - £{{$expense->amount}}
+            <a href="{{ route('category.show', ['category'=> $expense->type->id]) }}">{{$expense->type->name}}</a> - £{{$expense->amount}}
         </h3>
-        <p class="expense-detail__title"><a href="{{ route('vendor.show', ['id'=>$expense->vendor->id]) }}">{{$expense->vendor->name}}</a></br>
+        <p class="expense-detail__title"><a href="{{ route('vendor.show', ['vendor'=>$expense->vendor->id]) }}">{{$expense->vendor->name}}</a></br>
             {{$expense->description}} </p>
-        <form action={{ action( 'ExpenseController@destroy', [ 'id'=>$expense->id]) }} method="POST" > @csrf @method('DELETE')
+        <form action={{ action( 'ExpenseController@destroy', [ 'expense'=>$expense->id]) }} method="POST" > @csrf @method('DELETE')
             <button class="btn btn--incognito" type="submit">DELETE</button>
         </form>
         <div class="expense-details__footer">{{$expense->paid_on}} {{ $expense->user->name}}</div>
