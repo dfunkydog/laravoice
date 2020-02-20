@@ -25,3 +25,8 @@ Route::post('period/custom', 'PeriodController@customise')->name('periodCustomis
 Route::post('period', 'PeriodController@preset')->name('periodPreset');
 
 Auth::routes();
+
+
+Route::group(['prefix' => 'backoffice'], function () {
+    Voyager::routes();
+});
